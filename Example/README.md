@@ -7,16 +7,16 @@
 * Version    : v. 1.0.0
 
 
-#                                SYNOPSIS                                     #
+#                                SYNOPSIS                                     
 
 This is an example project to test how to build with the cmake utility.
 
                   
-#                                    FLAGS                                    #
+#                                    FLAGS                                    
 
-#                              CONFIGURATION                                  #
+#                              CONFIGURATION                                  
 
-#                                 INSTALLATION                                #
+#                                 INSTALLATION                                
   
 * Install a g++ compile and ensure that the g++ binary is in the Path variable.
 ** Windows : Visual Studio/Bloodshed Dev C++
@@ -27,6 +27,6 @@ This is an example project to test how to build with the cmake utility.
 
 * Build the project using make.sh or make.bat
                
-#                                 INSTRUCTIONS                                #  
+#                                 INSTRUCTIONS                                
 Run the utility via the command-line from the bin directory via ./Example . 
                
