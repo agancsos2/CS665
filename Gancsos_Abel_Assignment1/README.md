@@ -36,14 +36,13 @@ In case that you have used any design patterns, describe which design pattern yo
 
 ### Drink types
 * Coffee
-** Espresso
-** Americano
-** Latte Macchiato
-
-• Tea
-** Black Tea
-** Green Tee
-** Yellow Tea     
+     * Espresso
+     * Americano
+     * Latte Macchiato
+* Tea
+     * Black Tea
+     * Green Tee
+     * Yellow Tea     
 
 ### Condiments 
 * milk
@@ -54,14 +53,14 @@ In case that you have used any design patterns, describe which design pattern yo
 * -sort       : Applicable drink subtype
 * -condiments : Comma-separated list of applicable drink condiments
 * -amount     : Comma-separated list of applicable drink condiment quanity.  0-3.  Value must match the index in the condiments list
-* #           : Not really a flag, but can be used to exit interactive mode
+* \#           : Not really a flag, but can be used to exit interactive mode
 
 ## CONFIGURATION                                  
 ### INSTALLATION                                
 * Install a g++ compile and ensure that the g++ binary is in the Path variable.
-** Windows : Visual Studio
-** MacOS   : Install via XCode command-line tools
-** Linux   : Install using internal installer 
+    * Windows : Visual Studio
+    * MacOS   : Install via XCode command-line tools
+    * Linux   : Install using internal installer 
 
 * Download and install CMake from https://cmake.org/download/
 
