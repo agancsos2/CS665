@@ -54,7 +54,7 @@ In case that you have used any design patterns, describe which design pattern yo
 * -sort       : Applicable drink subtype
 * -condiments : Comma-separated list of applicable drink condiments
 * -amount     : Comma-separated list of applicable drink condiment quanity.  0-3.  Value must match the index in the condiments list
-* #           : Not really a flag, but can be used to exit interactive mode
+* \#           : Not really a flag, but can be used to exit interactive mode
 
 ## CONFIGURATION                                  
 ### INSTALLATION                                
