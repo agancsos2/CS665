@@ -86,7 +86,7 @@ it offers a simpler and more understandable format, which many developers may al
 
 * Download and install CMake from https://cmake.org/download/
 
-* Build the project using make.sh or make.bat
+* Build the project using run.sh or run.bat
 
 ## Executing                                
 Run the utility via the command-line from the bin directory via ./ . 
