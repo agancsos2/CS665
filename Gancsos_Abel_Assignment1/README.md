@@ -17,23 +17,6 @@ In order to handle future drink types, the controller uses abstract classes for 
 will be primarily used for input validation.  As for the condiments, we use another abstract class as we suspect that additional condiments might be added in the future.
 The controller then uses a "session" class as a wrapper to build out the transaction, which holds details of the selected options.
 
-## Implementation Description
-*How is the flexibility, of your implementation, e.g., how you add or remove in future new drink types?
-* How is the simplicity and understandability of your implementation?
-* How you avoided duplicated code?
-
-In case that you have used any design patterns, describe which design pattern you have applied and why.
-
-## Assumptions:
-* The dispensing mechanism works or the software group is not responsible for any mechanical bugs.  
-* Maybe some day the vending machine is to be run in a batchable mode, therefore, certain switches or flags are built into the controller. 
-* Additional drink types will be added in the future.
-* Additional drink sorts will be added in the future.
-* Additional drink condiments will be added in the future.
-* The restriction on drink condiment quantity may be raised or lifted completed.
-* The payment has already been provided before the controller is used.
-       
-
 ### Drink types
 * Coffee
      * Espresso
@@ -46,7 +29,24 @@ In case that you have used any design patterns, describe which design pattern yo
 
 ### Condiments 
 * milk
-* sugar                         
+* sugar  
+
+## Assumptions:
+* The dispensing mechanism works or the software group is not responsible for any mechanical bugs.  
+* Maybe some day the vending machine is to be run in a batchable mode, therefore, certain switches or flags are built into the controller. 
+* Additional drink types will be added in the future.
+* Additional drink sorts will be added in the future.
+* Additional drink condiments will be added in the future.
+* The restriction on drink condiment quantity may be raised or lifted completed.
+* The payment has already been provided before the controller is used.
+       
+## Implementation Description
+*How is the flexibility, of your implementation, e.g., how you add or remove in future new drink types?
+* How is the simplicity and understandability of your implementation?
+* How you avoided duplicated code?
+
+In case that you have used any design patterns, describe which design pattern you have applied and why.
+                    
 
 ## FLAGS                                    
 * -drink      : Applicable drink type
