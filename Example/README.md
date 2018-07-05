@@ -1,6 +1,6 @@
-#                                   README                                    #
+#                                   README                                    
 
-#                                    ABOUT                                    #
+#                                    ABOUT                                    
 
 * NAME       : Example
 * Author     : Abel Gancsos
