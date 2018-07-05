@@ -31,7 +31,7 @@ The controller then uses a "session" class as a wrapper to build out the transac
 * milk
 * sugar  
 
-## Assumptions:
+### Assumptions:
 * The dispensing mechanism works or the software group is not responsible for any mechanical bugs.  
 * Maybe some day the vending machine is to be run in a batchable mode, therefore, certain switches or flags are built into the controller. 
 * Additional drink types will be added in the future.
