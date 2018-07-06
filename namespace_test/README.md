@@ -1,6 +1,6 @@
 # Namespace Test
-########## Author    : Abel Gancsos
-########## Version   : v. 1.0.0
+* Author    : Abel Gancsos
+* Version   : v. 1.0.0
 
 ## Purpose
 The purpose of this project is to act as a proof of concept on how namespaces work in C++.  This is a very basic example; however, can show the very novoce C++ developer on how they can be used to better their code.
