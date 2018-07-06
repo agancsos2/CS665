@@ -22,6 +22,18 @@ namespace amgvendingcommon{
         }
     }
 
+	/**
+     * This method adds the condiments to the drink
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The condiments are added into the drink)
+     */
+    void VendingTea::AddCondiments(){
+        cout << "Adding condiments into drink::" << ToString() << endl;
+        for(int i = 0; i < condiments.size(); i++){
+            cout << "Added condiment::" << condiments[i]->ToString() << endl;
+        }
+    }
+
     /**
      * This method brews the drink
      * @precondition  (An instance of the class must exist)
@@ -29,6 +41,9 @@ namespace amgvendingcommon{
      */
     void VendingTea::Brew(){
         cout << "Brewing drink::" << ToString() << endl;
+		if(condiments.size() > 0){
+			AddCondiments();
+		}
     }
 
     /**

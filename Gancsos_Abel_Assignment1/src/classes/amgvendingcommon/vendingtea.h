@@ -22,6 +22,7 @@ namespace amgvendingcommon{
     class VendingTea : public VendingDrink {
         private:
             TEA_SORTS sort;
+			void AddCondiments();
         public:
             VendingTea();
             ~VendingTea(); 
