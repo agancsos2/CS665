@@ -9,21 +9,22 @@
 #include "condimentmilk.h"
 using namespace std;
 
-/**
- * This class represents a drink of any type
- */
-class VendingDrink {
-	protected:
-		vector<DrinkCondiment*> condiments;
-	public:
-		VendingDrink();
-		virtual ~VendingDrink();
-		virtual string GetType() = 0;
-		virtual string ToString() = 0;
-		virtual void AddCondiment(DrinkCondiment *a) = 0;
-		virtual void RemoveCondiment(DrinkCondiment *a) = 0; 
-		virtual vector<string> GetSorts() = 0;
-		virtual void Brew() = 0;
-};
-
+namespace amgvendingcommon{
+    /**
+     * This class represents a drink of any type
+     */
+    class VendingDrink {
+        protected:
+            vector<DrinkCondiment*> condiments;
+        public:
+            VendingDrink();
+            virtual ~VendingDrink();
+            virtual string GetType() = 0;
+            virtual string ToString() = 0;
+            virtual void AddCondiment(DrinkCondiment *a) = 0;
+            virtual void RemoveCondiment(DrinkCondiment *a) = 0; 
+            virtual vector<string> GetSorts() = 0;
+            virtual void Brew() = 0;
+    };
+}
 #endif

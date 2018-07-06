@@ -4,33 +4,36 @@
 #include <string>
 #include <vector>
 #include "vendingdrink.h"
+#include "../amgcommon/amgcommon_all.h"
 using namespace std;
+using namespace amgcommon;
 
-enum class COFFEE_SORTS {
-	NONE = 0,
-	ESPRESSO = 1,
-	AMERICANO = 2,
-	LATTE_MACCHIATO = 3  
-};
+namespace amgvendingcommon{
+    enum class COFFEE_SORTS {
+        NONE = 0,
+        ESPRESSO = 1,
+        AMERICANO = 2,
+        LATTE_MACCHIATO = 3  
+    };
 
-/**
- * This class represents a coffee type drink
- */
-class VendingCoffee : public VendingDrink {
-	private:
-		COFFEE_SORTS sort;
-	public:
-		VendingCoffee();
-		~VendingCoffee(); 
-		void SetSort(COFFEE_SORTS a);
-		COFFEE_SORTS GetSort();  
-        string GetType();
-        string ToString();
-        void AddCondiment(DrinkCondiment *a);
-        void RemoveCondiment(DrinkCondiment *a);
-		static COFFEE_SORTS EnsureSortByName(string a);
-		vector<string> GetSorts();
-		void Brew();
-};
-
+    /**
+     * This class represents a coffee type drink
+     */
+    class VendingCoffee : public VendingDrink {
+        private:
+            COFFEE_SORTS sort;
+        public:
+            VendingCoffee();
+            ~VendingCoffee(); 
+            void SetSort(COFFEE_SORTS a);
+            COFFEE_SORTS GetSort();  
+            string GetType();
+            string ToString();
+            void AddCondiment(DrinkCondiment *a);
+            void RemoveCondiment(DrinkCondiment *a);
+            static COFFEE_SORTS EnsureSortByName(string a);
+            vector<string> GetSorts();
+            void Brew();
+    };
+}
 #endif

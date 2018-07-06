@@ -6,4 +6,6 @@
 #include "amgconfiguration.h"
 #include "amgtracer.h"
 
+
+namespace amgcommon{}
 #endif

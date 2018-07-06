@@ -6,17 +6,18 @@
 #include "drinkcondiment.h"
 using namespace std;
 
-/**
- * This class represents a condiment of milk type
- */
-class CondimentMilk : public DrinkCondiment {
-    public:
-    	CondimentMilk();
-		CondimentMilk(int a);
-		~CondimentMilk();
-        string ToString();
-        string GetType();
-};
-
+namespace amgvendingcommon{
+    /**
+     * This class represents a condiment of milk type
+     */
+    class CondimentMilk : public DrinkCondiment {
+        public:
+            CondimentMilk();
+            CondimentMilk(int a);
+            ~CondimentMilk();
+            string ToString();
+            string GetType();
+    };
+}
 #endif
 

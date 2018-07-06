@@ -8,4 +8,5 @@
 #include "condimentsugar.h"
 #include "condimentmilk.h"
 
+namespace amgvendingcommon{}
 #endif

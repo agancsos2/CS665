@@ -4,27 +4,30 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "../amgcommon/amgstring.h"
-#include "../amgcommon/amgsystem.h"
+#include "../amgcommon/amgcommon_all.h"
 using namespace std;
+using namespace amgcommon;
 
-enum class INPUT_TYPES {
-	STRING,
-	NUMBER,
-	BOOL
-};
 
-/**
- * This class offers helper methods for the AMGVending "session" class
- * @author  (Abel Gancsos)
- * @version (v. 1.0.0)
- */
-class AMGVendingHelpers {
-	public:
-		static void HelpMenu();
-		static void ExitProgram();
-		static bool IsDigit(string a);
-		static bool ValidateInput(string a, INPUT_TYPES b);
-};
+namespace amgvending{
+	enum class INPUT_TYPES {
+		STRING,
+		NUMBER,
+		BOOL
+	};
+
+	/**
+ 	 * This class offers helper methods for the AMGVending "session" class
+ 	 * @author  (Abel Gancsos)
+ 	 * @version (v. 1.0.0)
+ 	 */
+	class AMGVendingHelpers {
+		public:
+			static void HelpMenu();
+			static void ExitProgram();
+			static bool IsDigit(string a);
+			static bool ValidateInput(string a, INPUT_TYPES b);
+	};
+}
 
 #endif

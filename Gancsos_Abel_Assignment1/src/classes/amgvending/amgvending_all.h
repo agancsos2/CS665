@@ -4,4 +4,5 @@
 #include "amgvending.h"
 #include "amgvendinghelpers.h"
 
+namespace amgvending{}
 #endif

@@ -4,33 +4,36 @@
 #include <string>
 #include <vector>
 #include "vendingdrink.h"
+#include "../amgcommon/amgcommon_all.h"
 using namespace std;
+using namespace amgcommon;
 
-enum class TEA_SORTS {
-	NONE = 0,
-	BLACK = 1,
-	GREEN = 2,
-	YELLOW = 3   
-};
+namespace amgvendingcommon{
+    enum class TEA_SORTS {
+        NONE = 0,
+        BLACK = 1,
+        GREEN = 2,
+        YELLOW = 3   
+    };
 
-/**
- * This class represents a tea type of drink
- */
-class VendingTea : public VendingDrink {
-	private:
-		TEA_SORTS sort;
-	public:
-		VendingTea();
-		~VendingTea(); 
-		void SetSort(TEA_SORTS a);
-		TEA_SORTS GetSort();     
-        string GetType();
-        string ToString();
-        void AddCondiment(DrinkCondiment *a);
-        void RemoveCondiment(DrinkCondiment *a);
-		static TEA_SORTS EnsureSortByName(string a);
-		vector<string> GetSorts();
-		void Brew();
-};
-
+    /**
+     * This class represents a tea type of drink
+     */
+    class VendingTea : public VendingDrink {
+        private:
+            TEA_SORTS sort;
+        public:
+            VendingTea();
+            ~VendingTea(); 
+            void SetSort(TEA_SORTS a);
+            TEA_SORTS GetSort();     
+            string GetType();
+            string ToString();
+            void AddCondiment(DrinkCondiment *a);
+            void RemoveCondiment(DrinkCondiment *a);
+            static TEA_SORTS EnsureSortByName(string a);
+            vector<string> GetSorts();
+            void Brew();
+    };
+}
 #endif

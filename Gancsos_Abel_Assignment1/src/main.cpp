@@ -10,6 +10,9 @@
 #include "classes/amgcommon/amgcommon_all.h"
 #include "classes/amgvending/amgvending_all.h"
 using namespace std;
+using namespace amgcommon;
+using namespace amgvending;
+using namespace amgvendingcommon;
 
 /**
  * This method is the main entry point from the command-line

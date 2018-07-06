@@ -6,17 +6,18 @@
 #include "drinkcondiment.h"
 using namespace std;
 
-/**
- * This class represents a sugar condiment type
- */
-class CondimentSugar : public DrinkCondiment {
-	public:
-		CondimentSugar();
-		CondimentSugar(int a);
-		~CondimentSugar();   
-    	string ToString();
-    	string GetType();
-};
-
+namespace amgvendingcommon{
+    /**
+     * This class represents a sugar condiment type
+     */
+    class CondimentSugar : public DrinkCondiment {
+        public:
+            CondimentSugar();
+            CondimentSugar(int a);
+            ~CondimentSugar();   
+            string ToString();
+            string GetType();
+    };
+}
 #endif
 
