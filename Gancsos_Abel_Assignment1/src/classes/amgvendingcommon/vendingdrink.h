@@ -16,6 +16,7 @@ namespace amgvendingcommon{
     class VendingDrink {
         protected:
             vector<DrinkCondiment*> condiments;
+			virtual void AddCondiments() = 0;
         public:
             VendingDrink();
             virtual ~VendingDrink();
@@ -25,7 +26,6 @@ namespace amgvendingcommon{
             virtual void RemoveCondiment(DrinkCondiment *a) = 0; 
             virtual vector<string> GetSorts() = 0;
             virtual void Brew() = 0;
-			virtual void AddCondiments() = 0;
     };
 }
 #endif
