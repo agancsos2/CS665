@@ -49,9 +49,7 @@ drink type or remove an existing one, the class simply needs to implement the ab
 
 An abstract class not only serves as a class which child classes will inherit the base characteristics, but also provides a way to 
 dynamically iterate through a collection of drink objects by calling the abstract methods.  When the abstract method is called against 
-the base class within the iteration, what actually happens is that the implementation is called against the child class.  
-This is possible since VendingDrink cannot be instantiated, only through the child class that implements the abstract methods.  
-This then provides the actual drink type, but represented as the abstract VendingDrink object.
+the base class within the iteration, what actually happens is that the implementation is called against the child class.  This is possible since VendingDrink cannot be instantiated, only through the child class that implements the abstract methods.  This then provides the actual drink type, but represented as the abstract VendingDrink object.
 
 Another design approach that was used was helper classes.  Although this is a very basic concept, by using the helper 
 class, AMGVendingHelpers, this offered a way to call common blocks of code in different areas of the program.  
