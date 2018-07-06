@@ -54,17 +54,33 @@ One thing to note, not really a design thing, is that JavaDoc style comments wer
 * -amount     : Comma-separated list of applicable drink condiment quanity.  0-3.  Value must match the index in the condiments list
 * \#           : Not really a flag, but can be used to exit interactive mode
 
-## CONFIGURATION                                  
-### INSTALLATION                                
-* Install a g++ compile and ensure that the g++ binary is in the Path variable.
-    * Windows : Visual Studio
-    * MacOS   : Install via XCode command-line tools
-    * Linux   : Install using internal installer 
+## PREREQUISITES
+### G++ compiler
+#### Windows
+Should come with Visual Studio 2017 in the form of devenv, but you can also try using Bloodshed Dev C++
+#### Mac
+Should come with XCode command-line tools
+#### Linux
+Should be installable using internal package installer
+### CMake
+#### Windows
+Should come with Visual Studio 2017 
+#### Mac
+Can be installed from https://cmake.org/download/
+#### Linux
+Can be installed from https://cmake.org/download/
 
-* Download and install CMake from https://cmake.org/download/
+## Build
+This can be built either using one of the run scripts or manually using the following instructions
+### Windows
+* Import into a new C++ project
+* Build using Visual Stuido 2017
 
-* Build the project using run.sh or run.bat
+### Mac
+Either import it into a new XCode project or compile on the command-line using g++ -std=c++11
 
-## Executing                                
-Run the utility via the command-line from the bin directory via ./ . 
+### Linux
+Compile using g++ -std=c++11
 
+## Execute
+Run the target that was generated in the build step
