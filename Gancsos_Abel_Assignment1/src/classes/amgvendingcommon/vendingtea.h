@@ -1,6 +1,7 @@
 #ifndef __VENDINGTEA_H_INCLUDED__
 #define __VENDINGTEA_H_INCLUDED__
 
+#include <unistd.h>
 #include <string>
 #include <vector>
 #include "vendingdrink.h"

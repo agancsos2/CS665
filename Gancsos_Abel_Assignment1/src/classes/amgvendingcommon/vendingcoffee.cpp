@@ -30,6 +30,11 @@ namespace amgvendingcommon{
 	void VendingCoffee::AddCondiments(){
 		cout << "Adding condiments into drink::" << ToString() << endl;
 		for(int i = 0; i < condiments.size(); i++){
+            #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+                Sleep(2 * 100);
+            #else
+                sleep(2);
+            #endif
 			cout << "Added condiment::" << condiments[i]->ToString() << endl;
 		}
 	}
@@ -41,6 +46,11 @@ namespace amgvendingcommon{
      */
     void VendingCoffee::Brew(){
         cout << "Brewing drink::" << ToString() << endl;
+		#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+			Sleep(brew_time_seconds * 100);
+		#else
+			sleep(brew_time_seconds);
+		#endif
 		if(condiments.size() > 0){
 			AddCondiments();
 		}
@@ -67,6 +77,7 @@ namespace amgvendingcommon{
      */
     VendingCoffee::VendingCoffee(){
         sort = COFFEE_SORTS::NONE;   
+		brew_time_seconds = 10;
     }
 
     /**
