@@ -41,13 +41,13 @@ The controller then uses a "session" class as a wrapper to build out the transac
 * The payment has already been provided before the controller is used.
        
 ## Implementation Description
-This utility was implemented using the Facade design pattern due to its many benefits towards the functionality of the project.  
+This utility was implemented using abstract classes due to their many benefits towards the functionality of the project.  
 For example, because it is expected that there will be new drink types added, an abstract class, VendingDrink, was created 
 to manage the base structure.  This base structure would then be inherited by any new drink type, for which certain operations 
 would be implemented using polymorphism in order to provide appropriate results for the new drink.  So in order to add a new 
 drink type or remove an existing one, the class simply needs to implement the abstract methods or the class should simply be removed.
 
-The Facade design pattern not only serves as a class which child classes will inherit the base characteristics, but also provides a way to 
+An abstract class not only serves as a class which child classes will inherit the base characteristics, but also provides a way to 
 dynamically iterate through a collection of drink objects by calling the abstract methods.  When the abstract method is called against 
 the base class within the iteration, what actually happens is that the implementation is called against the child class.  
 This is possible since VendingDrink cannot be instantiated, only through the child class that implements the abstract methods.  
