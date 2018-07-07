@@ -96,7 +96,7 @@ namespace amgvending {
     }
 
     void AMGVending::PromptDrinkType(){
-        while(!AMGVendingHelpers::IsDigit(input_buffer) || input_buffer == ""){
+        while(!AMGSystem::IsDigit(input_buffer) || input_buffer == ""){
             cout << "Item options:" << endl;
             for(int i = 0; i < drink_types.size(); i++){
                 cout << "\t* " << (i + 1) << ": " << drink_types[i] << endl;
@@ -104,9 +104,9 @@ namespace amgvending {
             cout << "Option: ";
             cin >> input_buffer;
             if(input_buffer == "#"){
-                AMGVendingHelpers::ExitProgram();
+                AMGSystem::ExitProgram();
             }
-            if(AMGVendingHelpers::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
+            if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
                 if(stoi(input_buffer) - 1 < drink_types.size()){
                     SetDrinkType(drink_types[stoi(input_buffer) - 1]);
                 }
@@ -118,7 +118,7 @@ namespace amgvending {
     }
 
     void AMGVending::PromptDrinkSort(){
-        while(!AMGVendingHelpers::IsDigit(input_buffer) || input_buffer == ""){
+        while(!AMGSystem::IsDigit(input_buffer) || input_buffer == ""){
             cout << "Sorts:" << endl;
             for(int i = 0; i < drink->GetSorts().size(); i++){
                 cout << "\t* " << (i + 1) << ": " << drink->GetSorts()[i] << endl;
@@ -126,9 +126,9 @@ namespace amgvending {
             cout << "Option: ";
             cin >> input_buffer;
             if(input_buffer == "#"){
-                AMGVendingHelpers::ExitProgram();
+                AMGSystem::ExitProgram();
             }
-            if(AMGVendingHelpers::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
+            if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
                 if(stoi(input_buffer) - 1 < drink->GetSorts().size()){
                     SetDrinkSort(drink->GetSorts()[stoi(input_buffer) - 1]);
                 }
@@ -143,12 +143,12 @@ namespace amgvending {
         for(int i = 0; i < drink_condiments.size(); i++){
             cout << "Would you like " << drink_condiments[i] << "? ";
             cin >> input_buffer;
-            if(AMGVendingHelpers::ValidateInput(input_buffer, INPUT_TYPES::BOOL)){
+            if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::BOOL)){
                 input_buffer = "";
                 while(input_buffer == ""){
                     cout << "How many servings would you like?: ";
                     cin >> input_buffer;
-                    if(AMGVendingHelpers::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
+                    if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
                         if(stoi(input_buffer) <= condiment_limit){
                             // Milk
                             if(i == 0){
@@ -189,7 +189,7 @@ namespace amgvending {
         cin >> input_buffer;
 
         
-        if(AMGVendingHelpers::ValidateInput(input_buffer, INPUT_TYPES::BOOL)){
+        if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::BOOL)){
             input_buffer = "";
             PromptCondiments();
         }

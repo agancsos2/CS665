@@ -1,7 +1,61 @@
 #include "amgsystem.h"
 
 namespace amgcommon{
-
+    /**
+     * This method quits the program
+     * @output        (Closing message)
+     * @precondition  (The utiity must be running)
+     * @postcondition (The program exists)
+     */
+    void AMGSystem::ExitProgram(){
+        cout << "Thank you for visiting.  Please come again soon...." << endl;
+        exit(0);
+    }
+    
+    /**
+     * This method checks if a string is a digit string
+     * @param a String value to parse
+     * @return        (True if all characters are integers, false if not)
+     * @precondition  (A string value is provided)
+     * @postcondition (Result is returned)
+     * @todo          (hould be changed to lambda function)
+     */
+    bool AMGSystem::IsDigit(string a){
+        for(int i = 0; i < a.length(); i++){
+            if(!isdigit(a[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * This method validates a user input
+     * @return        (True if valid, false if not)
+     * @param a Input to validate
+     * @param b Input type
+     * @precondition  (A string input value must be provided)
+     * @postcondition (Result is returned)
+     */
+    bool AMGSystem::ValidateInput(string a, INPUT_TYPES b){
+        switch(b){
+            case INPUT_TYPES::STRING:
+                return true;
+            case INPUT_TYPES::NUMBER:
+                return IsDigit(a);
+            case INPUT_TYPES::BOOL:
+                if(AMGString(a).ToLowerCase() == "1" ||
+                   AMGString(a).ToLowerCase() == "yes" ||
+                   AMGString(a).ToLowerCase() == "y"){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+        }
+        return false;
+    }
+    
 	/**
 	 * This method causes the process to sleep for a period of time
 	 * @param seconds Amount of seconds to sleep

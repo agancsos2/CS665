@@ -30,7 +30,7 @@ namespace amgvendingcommon{
 	void VendingCoffee::AddCondiments(){
 		cout << "Adding condiments into drink::" << ToString() << endl;
 		for(int i = 0; i < condiments.size(); i++){
-			AMGSystem().Sleep(2);
+			AMGSystem::Sleep(2);
 			cout << "Added condiment::" << condiments[i]->ToString() << endl;
 		}
 	}
@@ -42,7 +42,7 @@ namespace amgvendingcommon{
      */
     void VendingCoffee::Brew(){
         cout << "Brewing drink::" << ToString() << endl;
-		AMGSystem().Sleep(brew_time_seconds);
+		AMGSystem::Sleep(brew_time_seconds);
 		if(condiments.size() > 0){
 			AddCondiments();
 		}

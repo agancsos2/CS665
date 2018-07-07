@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
 
 					// Just set the values regardless of the amount.  Validation will be done later.
 					for(int i = 0; i < amount_values.size(); i++){
-						if(AMGVendingHelpers::ValidateInput(amount_values[i], INPUT_TYPES::NUMBER)){
+						if(AMGSystem::ValidateInput(amount_values[i], INPUT_TYPES::NUMBER)){
 							temp_condiments[i]->SetQuantity(stoi(amount_values[i]));
 						}
 						else{
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
 
 	// Exit program
 	if(!help){
-		AMGVendingHelpers::ExitProgram();
+		AMGSystem::ExitProgram();
 	}
 
 	return 0;
