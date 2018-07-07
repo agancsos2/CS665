@@ -30,11 +30,7 @@ namespace amgvendingcommon{
     void VendingTea::AddCondiments(){
         cout << "Adding condiments into drink::" << ToString() << endl;
         for(int i = 0; i < condiments.size(); i++){
-        	#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-            	Sleep(2 * 100);
-        	#else
-            	sleep(2);
-        	#endif
+			AMGSystem().Sleep(2);
             cout << "Added condiment::" << condiments[i]->ToString() << endl;
         }
     }
@@ -46,11 +42,7 @@ namespace amgvendingcommon{
      */
     void VendingTea::Brew(){
         cout << "Brewing drink::" << ToString() << endl;
-		#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-            Sleep(brew_time_seconds * 100);
-        #else
-            sleep(brew_time_seconds);
-        #endif
+		AMGSystem().Sleep(brew_time_seconds);
 		if(condiments.size() > 0){
 			AddCondiments();
 		}
