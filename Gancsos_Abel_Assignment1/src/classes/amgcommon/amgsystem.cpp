@@ -1,6 +1,20 @@
 #include "amgsystem.h"
 
 namespace amgcommon{
+
+	/**
+	 * This method causes the process to sleep for a period of time
+	 * @param seconds Amount of seconds to sleep
+	 * @postcondition (The process waits for a period of tine)
+	 */
+	void AMGSystem::Sleep(int seconds){
+    	#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+        	Sleep(seconds * 100);
+        #else
+        	sleep(seconds);
+        #endif
+	}
+
     /**
      * This is the default constructor.
      * @postcondition (A new AMGSystem object has been created.)

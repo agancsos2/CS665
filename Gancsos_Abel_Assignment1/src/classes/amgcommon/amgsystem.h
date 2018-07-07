@@ -1,6 +1,7 @@
 #ifndef __AMGSYSTEM_H_INCLUDED__  
 #define __AMGSYSTEM_H_INCLUDED__ 
 
+#include <unistd.h>
 #include <string>
 #include <vector>
 #include <stdexcept>
@@ -29,6 +30,7 @@ namespace amgcommon{
 			string GetSource();
 			string GetTarget();
 			bool FileExists(string path);
+			void Sleep(int seconds);
 	};
 }
 
