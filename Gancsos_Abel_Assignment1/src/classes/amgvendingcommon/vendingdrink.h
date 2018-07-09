@@ -17,7 +17,7 @@ namespace amgvendingcommon{
         protected:
             vector<DrinkCondiment*> condiments;
 			virtual void AddCondiments() = 0;
-			int brew_time_seconds;
+			const static int brew_time_seconds = 0;
         public:
             VendingDrink();
             virtual ~VendingDrink();

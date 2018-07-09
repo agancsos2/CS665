@@ -70,7 +70,6 @@ namespace amgvendingcommon{
      */
     VendingTea::VendingTea(){
         sort = TEA_SORTS::NONE;   
-		brew_time_seconds = 5;
     }
 
     /**

@@ -23,6 +23,7 @@ namespace amgvendingcommon{
         private:
             TEA_SORTS sort;
 			void AddCondiments();
+			const static int brew_time_seconds = 5;
         public:
             VendingTea();
             ~VendingTea(); 

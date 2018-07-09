@@ -23,6 +23,7 @@ namespace amgvendingcommon{
         private:
             COFFEE_SORTS sort;
 			void AddCondiments();
+			const static int brew_time_seconds = 10;
         public:
             VendingCoffee();
             ~VendingCoffee(); 

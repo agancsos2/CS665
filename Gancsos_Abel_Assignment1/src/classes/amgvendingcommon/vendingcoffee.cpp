@@ -69,7 +69,6 @@ namespace amgvendingcommon{
      */
     VendingCoffee::VendingCoffee(){
         sort = COFFEE_SORTS::NONE;   
-		brew_time_seconds = 10;
     }
 
     /**
