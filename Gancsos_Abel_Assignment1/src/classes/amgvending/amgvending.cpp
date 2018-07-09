@@ -95,6 +95,11 @@ namespace amgvending {
         RunOperation();
     }
 
+    /**
+     * This method prompts the user for drink type selection in an interactive session
+     * @precondition  (The instance of the object exists)
+     * @postcondition (The drink type is selected)
+     */
     void AMGVending::PromptDrinkType(){
         while(!AMGSystem::IsDigit(input_buffer) || input_buffer == ""){
             cout << "Item options:" << endl;
@@ -117,6 +122,11 @@ namespace amgvending {
         }
     }
 
+    /**
+     * This method prompts the user for a sort selection in an interactive session
+     * @precondition  (The instance of the object exists)
+     * @postcondition (The drink sort is selected)
+     */
     void AMGVending::PromptDrinkSort(){
         while(!AMGSystem::IsDigit(input_buffer) || input_buffer == ""){
             cout << "Sorts:" << endl;
@@ -139,6 +149,11 @@ namespace amgvending {
         }
     }
 
+    /**
+     * This method prompts the user for condiment selections in an interactive session
+     * @precondition  (The instance of the object exists)
+     * @postcondition (The condiments are added to the order)
+     */
     void AMGVending::PromptCondiments(){
         for(int i = 0; i < drink_condiments.size(); i++){
             cout << "Would you like " << drink_condiments[i] << "? ";
