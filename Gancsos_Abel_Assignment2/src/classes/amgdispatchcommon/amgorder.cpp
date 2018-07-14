@@ -23,6 +23,23 @@ namespace amgdispatchcommon {
 	}
 
     /**
+	 * This method checks if the order has any cold foods
+	 * @return True if it does, false if not
+	 * @precondition  (Instance of the object must exist)
+	 * @postcondition (The results of the search is returned)
+	 */
+	bool AMGOrder::HasColdFoods(){
+		for(int i = 0; i < this->items.size(); i++){
+			if(this->items[i]->GetProduct()->GetType() == "Food"){
+				if(dynamic_cast<AMGProductFood *>(this->items[i]->GetProduct())->GetFoodType() == FOOD_TYPE::COLD){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+    /**
      * This is the default constructor.
      * @postcondition (A new instance of the object has been created.)
      */

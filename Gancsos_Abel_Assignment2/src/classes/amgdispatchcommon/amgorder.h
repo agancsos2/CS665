@@ -40,6 +40,7 @@ namespace amgdispatchcommon {
         	AMGCustomer *GetCustomer();
         	void SetShop(AMGShop *a);
         	AMGShop *GetShop();
+			bool HasColdFoods();
 			static string GetStateName(ORDER_STATE a);
     };
 }

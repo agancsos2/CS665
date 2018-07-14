@@ -35,7 +35,6 @@ namespace amgdispatchsubject {
         	void Calculate();
         	void Dispatch(AMGDelivery *a, AMGVehicleObserver *b);
 			vector<AMGVehicleObserver *> GetAvailableVehicles();
-			bool HasColdFoods(AMGOrder *a);
 			vector<AMGVehicleObserver *> GetFreezerOnlyVehicles();
 			AMGVehicleObserver *Calculate(AMGOrder *a);
 		public:

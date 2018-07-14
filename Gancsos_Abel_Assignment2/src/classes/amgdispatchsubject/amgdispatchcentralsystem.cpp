@@ -22,24 +22,6 @@ namespace amgdispatchsubject {
 	}
 
 	/**
-	 * This method checks if the order has any cold foods
-	 * @param a Order
-	 * @return True if it does, false if not
-	 * @precondition  (Instance of the object must exist)
-	 * @postcondition (The results of the search is returned)
-	 */
-	bool AMGDispatchCentralSystem::HasColdFoods(AMGOrder *a){
-		for(int i = 0; i < a->GetItems().size(); i++){
-			if(a->GetItems()[i]->GetProduct()->GetType() == "Food"){
-				if(dynamic_cast<AMGProductFood *>(a->GetItems()[i]->GetProduct())->GetFoodType() == FOOD_TYPE::COLD){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * This method retrieves the available vehicles from the queue
 	 * @return Available vehicles
 	 * @precondition  (The instance of the object must exist)
@@ -146,7 +128,7 @@ namespace amgdispatchsubject {
 		}
 
         // Check if contains cold food items
-        if(HasColdFoods(a)){
+        if(a->HasColdFoods()){
         	// Check if there's a high traffic event
             if(traffic_events > 0){
             	traffic_events--;

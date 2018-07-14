@@ -8,14 +8,10 @@ using namespace amgdispatchcommon;
 
 namespace amgdispatchobserver {
 	class AMGDispatchObserver {
-		protected:
-			int distance;
-			AMGDelivery *delivery;
 		public:
 			AMGDispatchObserver();
 			virtual ~AMGDispatchObserver();
 			virtual void Update(int distance) = 0;
-			virtual void Display() = 0;
 	};
 }
 

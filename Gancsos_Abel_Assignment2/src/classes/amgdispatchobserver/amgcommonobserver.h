@@ -2,12 +2,14 @@
 #define __AMGCOMMONOBSERVER_H_INCLUDED
 
 #include <iostream>
+#include "amgdispatchobserver.h"
+#include "amgdispatchdisplay.h"
 #include "../amgdispatchcommon/amgdispatchcommon_all.h"
 using namespace std;
 using namespace amgdispatchcommon;
 
 namespace amgdispatchobserver {
-	class AMGCommonObserver {
+	class AMGCommonObserver : public AMGDispatchObserver, public AMGDispatchDisplay {
 		protected:
             int distance;
 			AMGDelivery *delivery;
