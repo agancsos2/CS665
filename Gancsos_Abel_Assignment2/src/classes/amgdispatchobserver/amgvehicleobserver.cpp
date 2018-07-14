@@ -3,6 +3,26 @@
 namespace amgdispatchobserver {
 
     /**
+     * This method sorts a list of vehicles by distance
+     * @param a List of vehicles to sort
+     * @return Sorted list
+     * @postcondition (The list of sorted vehicles is returned)
+     */
+    vector<AMGVehicleObserver *> AMGVehicleObserver::Sort(vector<AMGVehicleObserver *> a){
+        for(int i = 0; i < a.size(); i++){
+            for(int j = 0; j < a.size(); j++){
+                if(a[i]->GetVehicle()->GetDistance() > a[j]->GetVehicle()->GetDistance()){
+                    AMGVehicleObserver *temp = a[i];
+                    a[i] = a[j];
+                    a[j] = temp;
+                    delete temp;
+                }
+            }
+        }
+        return a;
+    }
+    
+    /**
      * This method sets the delivery object for dispatch purposes
      * @param a Delivery
      * @precondition  (The instance of the object must exist)

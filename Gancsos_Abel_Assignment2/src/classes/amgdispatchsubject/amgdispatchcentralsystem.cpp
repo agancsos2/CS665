@@ -17,7 +17,7 @@ namespace amgdispatchsubject {
 				freezer_only.push_back(available[i]);
 			}
 		}
-		sort(freezer_only.begin(), freezer_only.end());
+		freezer_only = AMGVehicleObserver::Sort(freezer_only);
 		return freezer_only;
 	}
 
@@ -37,7 +37,7 @@ namespace amgdispatchsubject {
 				}
 			}
 		}
-		sort(vehicles.begin(), vehicles.end());
+		vehicles = AMGVehicleObserver::Sort(vehicles);
 		return vehicles;
 	}
 
