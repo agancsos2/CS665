@@ -7,6 +7,7 @@ namespace amgdispatchobserver {
      * @param a List of vehicles to sort
      * @return Sorted list
      * @postcondition (The list of sorted vehicles is returned)
+     * @todo Change from bubble sort to merge sort
      */
     vector<AMGVehicleObserver *> AMGVehicleObserver::Sort(vector<AMGVehicleObserver *> a){
         for(int i = 0; i < a.size(); i++){
