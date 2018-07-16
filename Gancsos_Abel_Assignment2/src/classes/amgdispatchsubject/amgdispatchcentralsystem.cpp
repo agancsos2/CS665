@@ -130,8 +130,13 @@ namespace amgdispatchsubject {
         // Check if contains cold food items
         if(a->HasColdFoods()){
         	// Check if there's a high traffic event
-            if(traffic_events > 0){
-            	traffic_events--;
+			// or if the order distance will be greater than 2 miles
+			// Assume that if a customer is more than a mile away from the store, any vehicle 
+			// would make the total distance greater than 2 miles.
+            if(traffic_events > 0 || a->GetCustomer()->GetDistance() > 1){ 
+				if(traffic_events > 0){
+            		traffic_events--;
+				}
                 // Find available freezer vehicles only
                 if(this->GetFreezerOnlyVehicles().size() > 0){
                 	// Find closest distance
@@ -187,6 +192,7 @@ namespace amgdispatchsubject {
         				if(this->orders[i]->GetCustomer()->HasBirthday()){
             				// Add free gift to ordera
             				this->orders[i]->AddItem(new AMGItem(new AMGProductGift("Chocolate"), 1));
+                            this->orders[i]->AddItem(new AMGItem(new AMGProductFlowers("Flowers"), 1));
         				}	
 						// Dispatch delivery
 						this->Dispatch(new AMGDelivery(this->orders[i], current_vehicle->GetVehicle()->GetDistance() + 

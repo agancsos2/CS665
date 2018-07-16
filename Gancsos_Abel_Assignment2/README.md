@@ -33,6 +33,9 @@ This utility, AMGDeliveryDispatch, is a system that helps assign delivery orders
 * An order can have multiple items, but no more than one item of the same type.
 * The total distance of a delivery is considered the distance of the driver from the store plus the distance of the customer from the store.
 * An order doesn't become a delivery until it is ready for dispatch.
+* Any food that is required to be kept warm will come in it's own heater or the vehicle temperature is sufficient.
+* If a customer is more than a mile away from the shop, the total delivery distance will be more than 2 miles.
+* Freezers in vehicles are able to be turned off if not needed.
 
 ## Simulation criteria
 * 10 drivers
