@@ -2,21 +2,26 @@
 
 namespace amgdispatchobserver {
 
+	int AMGVehicleObserver::GetDistance(){
+		return this->distance;
+	}
+
     /**
      * This method sorts a list of vehicles by distance
      * @param a List of vehicles to sort
+	 * @param b Order
      * @return Sorted list
      * @postcondition (The list of sorted vehicles is returned)
      * @todo Change from bubble sort to merge sort
      */
-    vector<AMGVehicleObserver *> AMGVehicleObserver::Sort(vector<AMGVehicleObserver *> a){
+    vector<AMGVehicleObserver *> AMGVehicleObserver::Sort(vector<AMGVehicleObserver *> a, AMGOrder *b){
         for(int i = 0; i < a.size(); i++){
             for(int j = 0; j < a.size(); j++){
-                if(a[i]->GetVehicle()->GetDistance() > a[j]->GetVehicle()->GetDistance()){
+                if(a[i]->GetVehicle()->GetDistance(b->GetShop()->GetIdentity()) + b->GetCustomer()->GetDistance(b->GetShop()->GetIdentity()) > 
+					a[j]->GetVehicle()->GetDistance(b->GetShop()->GetIdentity()) + b->GetCustomer()->GetDistance(b->GetShop()->GetIdentity())){
                     AMGVehicleObserver *temp = a[i];
                     a[i] = a[j];
                     a[j] = temp;
-                    delete temp;
                 }
             }
         }
@@ -99,9 +104,11 @@ namespace amgdispatchobserver {
 			}
 		}
         else {
-			if((this->distance + distance) >= this->delivery->GetTotalDistance()) {
+			if((this->distance + distance) == this->delivery->GetTotalDistance()) {
 				this->distance = 0;
-				this->vehicle->SetDistance(this->delivery->GetOrder()->GetCustomer()->GetDistance());
+				for(int i = 0; i < this->vehicle->GetDistances().size(); i++){
+					this->vehicle->SetDistance(i, this->delivery->GetOrder()->GetCustomer()->GetDistance(i));
+				}
 				this->delivery->GetOrder()->SetState(ORDER_STATE::DELIVERED);
 				this->vehicle->SetState(VEHICLE_STATE::READY);
 				this->delivery = nullptr;
@@ -133,7 +140,15 @@ namespace amgdispatchobserver {
 			}	
 		}
 		if(this->vehicle->GetState() == VEHICLE_STATE::READY){
-				cout << "** Vehicle is ready.  current distance: " << this->vehicle->GetDistance() << endl;
+				cout << "** Vehicle is ready.  current distance: (";
+				for(int i = 0; i < this->vehicle->GetDistances().size(); i++){
+					if(i > 0){
+						cout << ";";
+					}
+					cout  << this->vehicle->GetDistance(i);
+				}
+				cout << ")";
+				cout << endl;
 		}
     }
 }

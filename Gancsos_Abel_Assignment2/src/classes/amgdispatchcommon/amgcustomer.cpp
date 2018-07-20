@@ -2,12 +2,63 @@
 
 namespace amgdispatchcommon {
 
+	/**
+     * This method adds a distance to the collection
+     * @param a Distance 
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The distance is added)
+     */
+	void AMGCustomer::AddDistance(int a) {
+	}
+
+    /**
+     * This method retrieves the distance of the object
+	 * @param a Store index
+     * @return Distance of the object
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The distance of the object is returned)
+     */
+    int AMGCustomer::GetDistance(int a) {
+		return distances[a];
+	}
+    
+    /**
+     * This method retrieves the distances for the state
+     * @return Distances of the state
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The distances of the state is returned)
+     */
+    vector<int> AMGCustomer::GetDistances(){
+        return this->distances;
+    }
+
+    /**
+     * This method removes a distance from the collection
+     * @param a Store index
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The distance is removed)
+     */
+    void AMGCustomer::RemoveDistance(int a) {
+		this->distances.erase(this->distances.begin() + a);
+	}
+
+    /**
+     * This method sets the distance of the object
+     * @param a Distance
+	 * @param b Store index
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The distance of the object is set)
+     */
+    void AMGCustomer::SetDistance(int a, int b) {
+     	this->distances[a] = b;
+    }
+
     /**
      * This is the default constructor.
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGCustomer::AMGCustomer() {
-		this->distance = 0;
+        this->distances.push_back(0);
 	}
 
     /**
@@ -22,7 +73,7 @@ namespace amgdispatchcommon {
         this->last_name = last;
         this->age = age;
         this->birthday = false;
-		this->distance = 0;
+        this->distances.push_back(0);
 		this->ssn = "";
     }
 
@@ -65,26 +116,7 @@ namespace amgdispatchcommon {
      * @postcondition (A new instance of the object has been created.)
      */
     AMGCustomer::AMGCustomer(int a){
-		this->distance = a;
+        this->distances.push_back(a);
 	}
     
-    /**
-     * This method retrieves the distance of the object
-     * @return Distance of the object
-     * @precondition  (The instance of the object must exist)
-     * @postcondition (The distance of the object is returned)
-     */
-	int AMGCustomer::GetDistance() {
-		return this->distance;
-	}
-    
-    /**
-     * This method sets the distance of the object
-     * @param a Distance of the object
-     * @precondition  (The instance of the object must exist)
-     * @postcondition (The distance of the object is set)
-     */
-	void AMGCustomer::SetDistance(int a){
-		this->distance = a;
-	}
 }

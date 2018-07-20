@@ -7,6 +7,7 @@ namespace amgdispatchcommon {
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGShop::AMGShop() {
+        this->identity = rand();
 	}
 
     /**
@@ -28,6 +29,7 @@ namespace amgdispatchcommon {
      */
     AMGShop::AMGShop(string name, int distance, vector<AMGProduct *> products) {
 		this->name = name;
+        this->identity = rand();
 		this->distance = distance;
 		this->products = products;
 	}
@@ -41,6 +43,26 @@ namespace amgdispatchcommon {
    	string AMGShop::GetName() {
 		return name;
 	}
+    
+    /**
+     * This method sets the ID of the object
+     * @param a ID of the object
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The id of the object is set)
+     */
+    void AMGShop::SetIdentity(int a) {
+        this->identity = a;
+    }
+    
+    /**
+     * This method retrieves the id of the object
+     * @return ID of the object
+     * @precondition  (The instance of the object must exist)
+     * @postcondition (The ID of the object is returned)
+     */
+    int AMGShop::GetIdentity() {
+        return this->identity;
+    }
 
     /**
      * This method returns the object as a string representation

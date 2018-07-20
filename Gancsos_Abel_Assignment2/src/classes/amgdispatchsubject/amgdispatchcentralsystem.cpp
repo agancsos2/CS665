@@ -2,32 +2,47 @@
 
 namespace amgdispatchsubject {
 
+	/**
+	 * This method checks if all deliveries were delivered
+	 * @return True if yes, false if no
+	 * @precondition  (The instance of the object must exist)
+     * @postcondition (The result of the lookup is returned)
+	 */
+	bool AMGDispatchCentralSystem::AllDelivered(){
+		if(GetAvailableVehicles(this->orders[0]).size() == this->observers.size()){
+			return true;
+		}
+		return false;
+	}
+
     /**
      * This method retrieves the available freezer only vehicles from the queue
+	 * @param a Order
 	 * @return Freezer only vehicles
      * @precondition  (The instance of the object must exist)
      * @postcondition (The list of available freezer only vehicles is returned)
      */
-	vector<AMGVehicleObserver *> AMGDispatchCentralSystem::GetFreezerOnlyVehicles() {
+	vector<AMGVehicleObserver *> AMGDispatchCentralSystem::GetFreezerOnlyVehicles(AMGOrder *a) {
 		vector<AMGVehicleObserver *> freezer_only;
 		vector<AMGVehicleObserver *> available;
-		available = this->GetAvailableVehicles();
+		available = this->GetAvailableVehicles(a);
 		for(int i = 0; i < available.size(); i++){
 			if(available[i]->GetVehicle()->HasFreezer()){
 				freezer_only.push_back(available[i]);
 			}
 		}
-		freezer_only = AMGVehicleObserver::Sort(freezer_only);
+		freezer_only = AMGVehicleObserver::Sort(freezer_only, a);
 		return freezer_only;
 	}
 
 	/**
 	 * This method retrieves the available vehicles from the queue
+	 * @param a Order
 	 * @return Available vehicles
 	 * @precondition  (The instance of the object must exist)
 	 * @postcondition (The list of available vehicles is returned)
 	 */
-	vector<AMGVehicleObserver *> AMGDispatchCentralSystem::GetAvailableVehicles(){
+	vector<AMGVehicleObserver *> AMGDispatchCentralSystem::GetAvailableVehicles(AMGOrder *a){
 		vector<AMGVehicleObserver *> vehicles;
 		for(int i = 0; i < this->observers.size(); i++){
 			AMGVehicleObserver *temp = static_cast<AMGVehicleObserver *>(this->observers[i]);
@@ -37,7 +52,7 @@ namespace amgdispatchsubject {
 				}
 			}
 		}
-		vehicles = AMGVehicleObserver::Sort(vehicles);
+		vehicles = AMGVehicleObserver::Sort(vehicles, a);
 		return vehicles;
 	}
 
@@ -120,7 +135,7 @@ namespace amgdispatchsubject {
      * @postcondition (The vehicle is returned if found)
      */
 	AMGVehicleObserver *AMGDispatchCentralSystem::Calculate(AMGOrder *a){
-        vector<AMGVehicleObserver *> available = this->GetAvailableVehicles();
+        vector<AMGVehicleObserver *> available = this->GetAvailableVehicles(a);
         AMGVehicleObserver *current_vehicle = nullptr;
 
 		if(available.size() == 0){
@@ -133,14 +148,14 @@ namespace amgdispatchsubject {
 			// or if the order distance will be greater than 2 miles
 			// Assume that if a customer is more than a mile away from the store, any vehicle 
 			// would make the total distance greater than 2 miles.
-            if(traffic_events > 0 || a->GetCustomer()->GetDistance() > 1){ 
+            if(traffic_events > 0 || a->GetCustomer()->GetDistance(a->GetShop()->GetIdentity()) > 1){ 
 				if(traffic_events > 0){
             		traffic_events--;
 				}
                 // Find available freezer vehicles only
-                if(this->GetFreezerOnlyVehicles().size() > 0){
+                if(this->GetFreezerOnlyVehicles(a).size() > 0){
                 	// Find closest distance
-                    current_vehicle = this->GetFreezerOnlyVehicles().at(0);
+                    current_vehicle = this->GetFreezerOnlyVehicles(a).at(0);
 					return current_vehicle;
                 }
                 else{
@@ -149,8 +164,8 @@ namespace amgdispatchsubject {
             }
 			else{
 				// Try freezer only first
-				if(this->GetFreezerOnlyVehicles().size() > 0){
-					return this->GetFreezerOnlyVehicles().at(0);
+				if(this->GetFreezerOnlyVehicles(a).size() > 0){
+					return this->GetFreezerOnlyVehicles(a).at(0);
 				}
 				// Pick the vehicle with the lowest distance
 				else {
@@ -172,7 +187,7 @@ namespace amgdispatchsubject {
      * @postcondition (The orders are up to date)
      */
     void AMGDispatchCentralSystem::Calculate() {
-		vector<AMGVehicleObserver *> available = this->GetAvailableVehicles();
+		vector<AMGVehicleObserver *> available = this->GetAvailableVehicles(this->orders[0]);
         AMGVehicleObserver *current_vehicle = nullptr;
 
 		// If there's any vehicles available
@@ -181,7 +196,7 @@ namespace amgdispatchsubject {
 			// For each waiting order
 			int i = 0;
 			while(i < this->orders.size()){
-				available = this->GetAvailableVehicles();
+				available = this->GetAvailableVehicles(this->orders[i]);
 				if(available.size() == 0){
 					break;
 				}
@@ -195,8 +210,8 @@ namespace amgdispatchsubject {
                             this->orders[i]->AddItem(new AMGItem(new AMGProductFlowers("Flowers"), 1));
         				}	
 						// Dispatch delivery
-						this->Dispatch(new AMGDelivery(this->orders[i], current_vehicle->GetVehicle()->GetDistance() + 
-							this->orders[i]->GetCustomer()->GetDistance()), current_vehicle); 
+						this->Dispatch(new AMGDelivery(this->orders[i], current_vehicle->GetVehicle()->GetDistance(this->orders[i]->GetShop()->GetIdentity()) + 
+							this->orders[i]->GetCustomer()->GetDistance(this->orders[i]->GetShop()->GetIdentity())), current_vehicle); 
 						this->orders.erase(this->orders.begin() + i);
 
 					}
@@ -225,7 +240,7 @@ namespace amgdispatchsubject {
      * @postcondition (Statuses are displayed and any waiting order is dispatched if available)
      */
     void AMGDispatchCentralSystem::PollStatuses() {
-		while(this->orders.size() > 0){
+		while(this->orders.size() > 0 || !AllDelivered()){
 			for(int i = 0; i < this->orders.size(); i++){
 				if(this->orders[i]->GetState() == ORDER_STATE::DELIVERED){
 					delete this->orders[i];
@@ -242,7 +257,7 @@ namespace amgdispatchsubject {
             this->DisplayAll();
 
 			cout << "SLEEPING.... (" << this->orders.size() << " orders left; " << 
-				this->GetAvailableVehicles().size() << " available vehicles; " << this->traffic_events << " high traffic events)" << endl;
+				this->GetAvailableVehicles(this->orders[0]).size() << " available vehicles; " << this->traffic_events << " high traffic events)" << endl;
 			cout << "Waiting Orders:" << endl;
 			for(int i = 0; i < this->orders.size(); i++){
 				if(this->orders[i]->GetState() != ORDER_STATE::FILLED){
@@ -251,7 +266,7 @@ namespace amgdispatchsubject {
 			}
 
 			// Prevent infinite loop
-			if(this->GetAvailableVehicles().size() == this->observers.size() && this->orders.size() > 0){
+			if(this->GetAvailableVehicles(this->orders[0]).size() == this->observers.size() && this->orders.size() > 0){
 				retries++;
 				// Allow several retries
 				if(retries == max_retries){
@@ -260,7 +275,7 @@ namespace amgdispatchsubject {
 			}
 
 			cout << "Available Vehicles: " << endl;
-			vector<AMGVehicleObserver *>available = this->GetAvailableVehicles();
+			vector<AMGVehicleObserver *>available = this->GetAvailableVehicles(this->orders[0]);
 			for(int i = 0; i < available.size(); i++){
 				cout << available[i]->GetVehicle()->ToString() << endl;
 			}

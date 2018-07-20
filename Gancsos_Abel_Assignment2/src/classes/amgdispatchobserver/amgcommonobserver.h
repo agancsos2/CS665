@@ -19,6 +19,7 @@ namespace amgdispatchobserver {
 			virtual ~AMGCommonObserver();
 			virtual void Update(int distance) = 0;		
 			virtual void Display() = 0;
+			virtual int GetDistance() = 0;
 	};
 }
 

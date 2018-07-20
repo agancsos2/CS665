@@ -13,16 +13,19 @@ namespace amgdispatchcommon {
 	class AMGCustomer : public AMGPerson {
 
 		private:
-			int distance;
+			vector<int> distances;
 		public:
 			AMGCustomer();
 			~AMGCustomer();
 			AMGCustomer(int distance);
-			int GetDistance();
-			void SetDistance(int a);
+            int GetDistance(int a);
+            void AddDistance(int a);
+            void RemoveDistance(int a);
+            void SetDistance(int a, int b);
 			string GetType();
 			string ToString();
         	AMGCustomer(string first, string last, int age);
+            vector<int> GetDistances();
     };
 }
 #endif

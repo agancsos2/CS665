@@ -21,7 +21,7 @@ namespace amgdispatchcommon {
      */
     class AMGVehicle {
 		protected:
-			int distance;
+			vector<int> distances;
 			string name;
 			bool freezer;
 			VEHICLE_STATE state;
@@ -32,8 +32,11 @@ namespace amgdispatchcommon {
 			string GetName();
 			string ToString();
 			bool HasFreezer();
-			int GetDistance();
-        	void SetDistance(int a);
+			vector<int> GetDistances();
+			void AddDistance(int a);
+            int GetDistance(int a);
+			void RemoveDistance(int a);
+        	void SetDistance(int a, int b);
 			static string GetStateName(VEHICLE_STATE a);
 			void SetState(VEHICLE_STATE a);
 			VEHICLE_STATE GetState();

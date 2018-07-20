@@ -13,7 +13,9 @@ namespace amgdispatch {
 		vector<AMGCustomer *> customers;
 		for(int i = 0; i < order_count; i++){
 			AMGCustomer *temp = new AMGCustomer("Test" + to_string(i), "Customer", (rand() % 80 + 18));
-			temp->SetDistance(rand() % order_count + 1);
+			for(int i = 0; i < shop_count; i++){
+				temp->AddDistance(rand() % 20 + 1);
+			}
 			temp->SetBirthday(((rand() % 1) == 1 ? true : false));
 			customers.push_back(temp);
 		}
@@ -21,6 +23,9 @@ namespace amgdispatch {
 		// Create vehicles
 		for(int i = 0; i < driver_count; i++){
 			AMGVehicle *temp = new AMGVehicle("Vehicle" + to_string(i), ((rand() % 2 + 1) == 1 ? true : false));
+            for(int i = 0; i < shop_count; i++){
+                temp->AddDistance(rand() % 20 + 1);
+            }
 			vehicles.push_back(temp);
 		}
 
@@ -46,6 +51,7 @@ namespace amgdispatch {
 				}
 			}
 			shops.push_back(new AMGShop("Shop" + to_string(i), (rand() % shop_count + 1), store_products));
+			shops[i]->SetIdentity(i);
 		}
 		// Create orders
 		for(int i = 0; i < order_count; i++){
@@ -55,8 +61,9 @@ namespace amgdispatch {
 			customers.erase(customers.begin() + rand_customer_index);    
 
             AMGShop *temp_store = shops[(rand() % shops.size())];
-	
-		    // Add items to orders
+			temp->SetShop(temp_store);
+		    
+			// Add items to orders
 			for(int j = 0; j < (rand() % 3 + 1); j++){
 				AMGProduct *temp_product = temp_store->GetProducts()[(rand() % temp_store->GetProducts().size())];
 				AMGItem *temp_item = new AMGItem(temp_product, (rand() % 5 + 1));

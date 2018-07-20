@@ -26,7 +26,8 @@ namespace amgdispatchobserver {
 			AMGVehicle *GetVehicle();
 			void SetDelivery(AMGDelivery *a);
 			AMGDelivery *GetDelivery();
-        	static vector<AMGVehicleObserver *> Sort(vector<AMGVehicleObserver *> a);
+			int GetDistance();
+        	static vector<AMGVehicleObserver *> Sort(vector<AMGVehicleObserver *> a, AMGOrder *b);
 	};	
 }
 

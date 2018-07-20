@@ -34,9 +34,10 @@ namespace amgdispatchsubject {
         	void DisplayAll();
         	void Calculate();
         	void Dispatch(AMGDelivery *a, AMGVehicleObserver *b);
-			vector<AMGVehicleObserver *> GetAvailableVehicles();
-			vector<AMGVehicleObserver *> GetFreezerOnlyVehicles();
+			vector<AMGVehicleObserver *> GetAvailableVehicles(AMGOrder *a);
+			vector<AMGVehicleObserver *> GetFreezerOnlyVehicles(AMGOrder *a);
 			AMGVehicleObserver *Calculate(AMGOrder *a);
+			bool AllDelivered();
 		public:
 			AMGDispatchCentralSystem();
 			AMGDispatchCentralSystem(int a);
