@@ -7,7 +7,7 @@
 ###############################################################################
 
 APP_ROOT=$(dirname "$0")
-CMAKE_PATH="/Users/computerfox/Downloads/cmake-3.12.0-rc2/Bootstrap.cmk"
+CMAKE_PATH=""
 
 rm -fR $APP_ROOT/../bin/*
 cd $APP_ROOT/../bin && $CMAKE_PATH/cmake ../
