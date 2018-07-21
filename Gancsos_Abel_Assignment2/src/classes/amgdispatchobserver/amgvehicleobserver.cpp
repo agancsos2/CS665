@@ -64,7 +64,7 @@ namespace amgdispatchobserver {
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGVehicleObserver::AMGVehicleObserver() {
-		this->delivery = new AMGDelivery();
+		this->delivery = nullptr;
 		this->vehicle = new AMGVehicle();
 		this->distance = 0;
 	}
@@ -104,11 +104,15 @@ namespace amgdispatchobserver {
 			}
 		}
         else {
-			if((this->distance + distance) == this->delivery->GetTotalDistance()) {
+			if((this->distance + distance) >= this->delivery->GetTotalDistance()) {
 				this->distance = 0;
-				for(int i = 0; i < this->vehicle->GetDistances().size(); i++){
+                
+                for(int i = 0; i < this->vehicle->GetDistances().size(); i++){
 					this->vehicle->SetDistance(i, this->delivery->GetOrder()->GetCustomer()->GetDistance(i));
 				}
+                if(this->vehicle->GetDistance(0) == 0){
+                    throw invalid_argument("Unexpected zero distance...");
+                }
 				this->delivery->GetOrder()->SetState(ORDER_STATE::DELIVERED);
 				this->vehicle->SetState(VEHICLE_STATE::READY);
 				this->delivery = nullptr;
@@ -137,6 +141,10 @@ namespace amgdispatchobserver {
 			if(this->vehicle->GetState() == VEHICLE_STATE::IN_TRANSIT){
 				cout << "** Miles Travelled: " << this->distance << endl;
 				cout << "** Miles Left     : " << this->delivery->GetTotalDistance() - this->distance << endl;
+                
+                if(this->delivery->GetTotalDistance() - this->distance < 0){
+                    throw invalid_argument("Unexpected zero total distance...");
+                }
 			}	
 		}
 		if(this->vehicle->GetState() == VEHICLE_STATE::READY){

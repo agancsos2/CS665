@@ -14,7 +14,7 @@ namespace amgdispatch {
 		for(int i = 0; i < order_count; i++){
 			AMGCustomer *temp = new AMGCustomer("Test" + to_string(i), "Customer", (rand() % 80 + 18));
 			for(int i = 0; i < shop_count; i++){
-				temp->AddDistance(rand() % 20 + 1);
+				temp->AddDistance((rand() % order_count) + 2);
 			}
 			temp->SetBirthday(((rand() % 1) == 1 ? true : false));
 			customers.push_back(temp);
@@ -24,7 +24,7 @@ namespace amgdispatch {
 		for(int i = 0; i < driver_count; i++){
 			AMGVehicle *temp = new AMGVehicle("Vehicle" + to_string(i), ((rand() % 2 + 1) == 1 ? true : false));
             for(int i = 0; i < shop_count; i++){
-                temp->AddDistance(rand() % 20 + 1);
+                temp->AddDistance((rand() % driver_count) + 2);
             }
 			vehicles.push_back(temp);
 		}
@@ -122,7 +122,12 @@ namespace amgdispatch {
     void AMGDispatch::AMGDispatch::Run(){
         FillSimulatedData();
 
-		// Register the vehicles as observers
+        // Address issue where the first distance for each customer is set to zero
+        for(int i = 0; i < orders.size(); i ++){
+            orders[i]->GetCustomer()->SetDistance(0, rand() % order_count + 1);
+        }
+
+        // Register the vehicles as observers
 		for(AMGVehicle *cursor : vehicles){
 			this->env->RegisterObserver(new AMGVehicleObserver(cursor));			
 		}

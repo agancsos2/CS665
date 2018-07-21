@@ -98,7 +98,7 @@ namespace amgdispatchcommon {
      * @postcondition (The customer of the object is returned)
      */
     AMGCustomer *AMGOrder::GetCustomer() {
-        return customer;
+        return this->customer;
     }
 
     /**

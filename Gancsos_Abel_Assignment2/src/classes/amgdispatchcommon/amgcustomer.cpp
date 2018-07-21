@@ -9,6 +9,7 @@ namespace amgdispatchcommon {
      * @postcondition (The distance is added)
      */
 	void AMGCustomer::AddDistance(int a) {
+        this->distances.push_back(a);
 	}
 
     /**
@@ -58,7 +59,6 @@ namespace amgdispatchcommon {
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGCustomer::AMGCustomer() {
-        this->distances.push_back(0);
 	}
 
     /**
@@ -116,7 +116,6 @@ namespace amgdispatchcommon {
      * @postcondition (A new instance of the object has been created.)
      */
     AMGCustomer::AMGCustomer(int a){
-        this->distances.push_back(a);
 	}
     
 }
