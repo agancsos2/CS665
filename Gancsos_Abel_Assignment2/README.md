@@ -6,7 +6,7 @@
 * Version    : v. 1.0.0
 
 ## Implementation Details  
-This utility, AMGDeliveryDispatch, is a system that helps assign delivery orders to appropriate vans based on certain criteria once the purchase has been completed.  The system starts by taking in a certain number of orders containing various number of items from different customers at different shops.  The assignment process then scans the type of items in the orders, checks if it's the customers birthday, calculates the total distance of the delivery, and then checks if there's an available driver.  To ensure appropriate delivery time and proper state of the product upon delivery, the assignment process also checks for any traffic that could occur while in transit.  If an order is not able to be dispatched due to lack of drivers or unavailable resources, the order waits until a proper resource has become available.  Once the driver has been assigned, the customer is then notified of a scheduled delivery.  The controller then continues to recalculate the assignment at an interval until all orders have been delivered.
+This utility, AMGDeliveryDispatch, is a system that helps assign delivery orders to appropriate vans based on certain criteria once the purchase has been completed.  The system starts by taking in a certain number of orders containing various number of items from different customers at different shops.  The assignment process then scans the type of items in the orders, checks if it's the customers birthday, calculates the total distance of the delivery, and then checks if there's an available driver.  To ensure appropriate delivery time and proper state of the product upon delivery, the assignment process also checks for any traffic that could occur while in transit.  If an order is not able to be dispatched due to lack of drivers or unavailable resources, the order waits until a proper resource has become available.  Once the driver has been assigned, the customer is then notified of a scheduled delivery.  The controller then continues to recalculate the assignment at an interval until all orders have been delivered.  Note that raw pointers are used, which although isn't recommended and requires manual memory management, it provides a mechanism to implement fields.
 
 ### Product types
 * Food
@@ -22,7 +22,7 @@ This utility, AMGDeliveryDispatch, is a system that helps assign delivery orders
 
 ### Assumptions
 * The order has already been completed and paid for by the time the process enters into this utility.
-* In addition to notifiying the customer of an expected delivery, the driver is told where to pick the order up.
+* In addition to notifying the customer of an expected delivery, the driver is told where to pick the order up.
 * Although the system would use GPA coordinates to calculate driver location, the distance is calculated by random numbers in miles for simulation purposes.
 * More product types can be added in the future.
 * Food types can be of any type.
