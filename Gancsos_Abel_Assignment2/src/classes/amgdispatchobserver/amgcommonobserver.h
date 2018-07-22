@@ -12,10 +12,10 @@ namespace amgdispatchobserver {
 	class AMGCommonObserver : public AMGDispatchObserver, public AMGDispatchDisplay {
 		protected:
             int distance;
-			AMGDelivery *delivery;
+			shared_ptr<AMGDelivery> delivery;
 		public:
 			AMGCommonObserver();
-			virtual AMGDelivery *GetDelivery();
+			virtual shared_ptr<AMGDelivery> GetDelivery();
 			virtual ~AMGCommonObserver();
 			virtual void Update(int distance) = 0;		
 			virtual void Display() = 0;

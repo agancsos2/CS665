@@ -15,19 +15,19 @@ namespace amgdispatchobserver {
 	class AMGVehicleObserver : public AMGCommonObserver {
 
 		private:
-			AMGVehicle *vehicle;
+			shared_ptr<AMGVehicle> vehicle;
         	const static int notify_delay_seconds = 3;
 		public:
 			AMGVehicleObserver();
 			~AMGVehicleObserver();
-			AMGVehicleObserver(AMGVehicle *a);
+			AMGVehicleObserver(shared_ptr<AMGVehicle> a);
 			void Update(int distance);
         	void Display();
-			AMGVehicle *GetVehicle();
-			void SetDelivery(AMGDelivery *a);
-			AMGDelivery *GetDelivery();
+			shared_ptr<AMGVehicle> GetVehicle();
+			void SetDelivery(shared_ptr<AMGDelivery> a);
+			shared_ptr<AMGDelivery> GetDelivery();
 			int GetDistance();
-        	static vector<AMGVehicleObserver *> Sort(vector<AMGVehicleObserver *> a, AMGOrder *b);
+        	static vector<shared_ptr<AMGVehicleObserver> > Sort(vector<shared_ptr<AMGVehicleObserver> > a, shared_ptr<AMGOrder> b);
 	};	
 }
 

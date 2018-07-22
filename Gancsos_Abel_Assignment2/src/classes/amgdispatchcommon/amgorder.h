@@ -5,6 +5,7 @@
 #include <vector>
 #include "amgitem.h"
 #include "amgcustomer.h"
+#include <memory>
 #include "amgshop.h"
 using namespace std;
 
@@ -23,23 +24,23 @@ namespace amgdispatchcommon {
      */
 	class AMGOrder {
 		private:
-			vector<AMGItem *> items;
-        	AMGCustomer *customer;
-        	AMGShop *shop;
+			vector<shared_ptr<AMGItem> > items;
+        	shared_ptr<AMGCustomer> customer;
+        	shared_ptr<AMGShop> shop;
 			ORDER_STATE state;
 		public:
 			AMGOrder();
 			~AMGOrder();
 			ORDER_STATE GetState();
 			void SetState(ORDER_STATE a);
-			void AddItem(AMGItem *item);
-			void RemoveItem(AMGItem *item);
-			vector<AMGItem *> GetItems();
+			void AddItem(shared_ptr<AMGItem> item);
+			void RemoveItem(shared_ptr<AMGItem> item);
+			vector<shared_ptr<AMGItem> > GetItems();
 			string ToString();
-        	void SetCustomer(AMGCustomer *a);
-        	AMGCustomer *GetCustomer();
-        	void SetShop(AMGShop *a);
-        	AMGShop *GetShop();
+        	void SetCustomer(shared_ptr<AMGCustomer> a);
+        	shared_ptr<AMGCustomer> GetCustomer();
+        	void SetShop(shared_ptr<AMGShop> a);
+        	shared_ptr<AMGShop> GetShop();
 			bool HasColdFoods();
 			static string GetStateName(ORDER_STATE a);
     };

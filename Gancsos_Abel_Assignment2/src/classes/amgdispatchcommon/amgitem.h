@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "amgproduct.h"
+#include <memory>
 #include "amgproductfood.h"
 using namespace std;
 
@@ -11,19 +12,19 @@ namespace amgdispatchcommon {
 
     class AMGItem {
         private:
-			AMGProduct *product;
+			shared_ptr<AMGProduct> product;
 			int quantity;
         public:
             AMGItem();
             ~AMGItem();
-			AMGItem(AMGProduct *product, int q);
-			void SetProduct(AMGProduct *product);
-			AMGProduct *GetProduct();
+			AMGItem(shared_ptr<AMGProduct> product, int q);
+			void SetProduct(shared_ptr<AMGProduct> product);
+			shared_ptr<AMGProduct> GetProduct();
 			void SetQuantity(int q);
 			int GetQuantity();
 			string ToString();
 			string GetType();
-			bool Equals(AMGItem *item2);
+			bool Equals(shared_ptr<AMGItem> item2);
     };
 }
 #endif

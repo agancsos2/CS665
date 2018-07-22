@@ -7,7 +7,7 @@ namespace amgdispatchobserver {
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGCustomerObserver::AMGCustomerObserver() {
-		this->customer = new AMGCustomer();
+		this->customer = shared_ptr<AMGCustomer>(new AMGCustomer());
 	}
 
     /**
@@ -15,7 +15,6 @@ namespace amgdispatchobserver {
      * @postcondition (The instance of the object is removed from memory)
      */
 	AMGCustomerObserver::~AMGCustomerObserver() {
-		delete customer;
 	}
 
     /**
@@ -23,7 +22,7 @@ namespace amgdispatchobserver {
      * @param a Customer object for the observer
      * @postcondition (A new instance of the object has been created.)
      */
-    AMGCustomerObserver::AMGCustomerObserver(AMGCustomer *a) {
+    AMGCustomerObserver::AMGCustomerObserver(shared_ptr<AMGCustomer> a) {
 		this->customer = a;
 	}
     
@@ -34,7 +33,7 @@ namespace amgdispatchobserver {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The object is updated)
      */
-    void AMGCustomerObserver::Update(AMGDelivery *delivery, int distance) {
+    void AMGCustomerObserver::Update(shared_ptr<AMGDelivery> delivery, int distance) {
         if(this->delivery == nullptr){
 			this->delivery = delivery;
             cout << "Notifying customer that they have a new scheduled delivery..." << endl;

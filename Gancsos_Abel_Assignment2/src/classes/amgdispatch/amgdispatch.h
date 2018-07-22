@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
+#include <memory>
 #include <time.h>
 #include "../amgcommon/amgcommon_all.h"
 #include "amgdispatch_all.h"
@@ -27,9 +28,9 @@ namespace amgdispatch{
 			void FillSimulatedData();
         	AMGDispatchCentralSystem *env;
 			string input_buffer;
-			vector<AMGOrder *> orders;
-			vector<AMGVehicle *> vehicles;
-			vector<AMGProduct *> products;
+			vector<shared_ptr<AMGOrder> > orders;
+			vector<shared_ptr<AMGVehicle> > vehicles;
+			vector<shared_ptr<AMGProduct> > products;
 			const static int driver_count = 10;
 			const static int order_count = 20;
 			const static int shop_count = 5;

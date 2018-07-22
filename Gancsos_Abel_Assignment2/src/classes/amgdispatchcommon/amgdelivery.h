@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
+#include <memory>
 #include "amgorder.h"
 using namespace std;
 
@@ -14,14 +15,14 @@ namespace amgdispatchcommon {
     class AMGDelivery {
     	private:
         	int delivery_id;
-        	AMGOrder *order;
+        	shared_ptr<AMGOrder> order;
 			int total_distance;
         public:
         	AMGDelivery();
         	~AMGDelivery();
-			AMGDelivery(AMGOrder *order, int distance);
-			AMGOrder *GetOrder();
-			void SetOrder(AMGOrder *order);
+			AMGDelivery(shared_ptr<AMGOrder> order, int distance);
+			shared_ptr<AMGOrder> GetOrder();
+			void SetOrder(shared_ptr<AMGOrder> order);
         	string ToString();
 			void SetTotalDistance(int distance);
 			int GetTotalDistance();

@@ -9,7 +9,7 @@ namespace amgdispatchcommon {
 	 * @precondition  (Both instances of the object must exist)
 	 * @postcondition (The result of the comparison)
 	 */
-	bool AMGItem::Equals(AMGItem *item2){
+	bool AMGItem::Equals(shared_ptr<AMGItem> item2){
 		if(this->product->ToString() == item2->ToString()){
 			return true;
 		}
@@ -31,7 +31,7 @@ namespace amgdispatchcommon {
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGItem::AMGItem() {
-		this->product = new AMGProductFood();
+		this->product = shared_ptr<AMGProduct>(new AMGProductFood());
 		this->quantity = 0;
 	}
 
@@ -40,7 +40,6 @@ namespace amgdispatchcommon {
      * @postcondition (The instance of the object is removed from memory)
      */
     AMGItem::~AMGItem() {
-		delete product;
 	}
 
     /**
@@ -49,7 +48,7 @@ namespace amgdispatchcommon {
      * @param q Quantity of the item
      * @postcondition (A new instance of the object has been created.)
      */
-    AMGItem::AMGItem(AMGProduct *product, int q) {
+    AMGItem::AMGItem(shared_ptr<AMGProduct> product, int q) {
 		this->product = product;
 		this->quantity = q;
 	}
@@ -60,7 +59,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The product of the object is set)
      */
-    void AMGItem::SetProduct(AMGProduct *product) {
+    void AMGItem::SetProduct(shared_ptr<AMGProduct> product) {
 		this->product = product;
 	}
 
@@ -70,7 +69,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The product of the object is returned)
      */
-    AMGProduct *AMGItem::GetProduct() {
+    shared_ptr<AMGProduct> AMGItem::GetProduct() {
 		return this->product;
 	}
 

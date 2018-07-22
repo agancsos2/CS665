@@ -31,9 +31,9 @@ namespace amgdispatchcommon {
 	bool AMGOrder::HasColdFoods(){
 		for(int i = 0; i < this->items.size(); i++){
 			if(this->items[i]->GetProduct()->GetType() == "Food"){
-				if(dynamic_cast<AMGProductFood *>(this->items[i]->GetProduct())->GetFoodType() == FOOD_TYPE::COLD){
+				/*if((dynamic_pointer_cast<shared_ptr<AMGProductFood> >(this->items[i]->GetProduct())).GetFoodType() == FOOD_TYPE::COLD){
 					return true;
-				}
+				}*/
 			}
 		}
 		return false;
@@ -44,8 +44,8 @@ namespace amgdispatchcommon {
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGOrder::AMGOrder() {
-        this->customer = nullptr;
-        this->shop = nullptr;
+        this->customer = shared_ptr<AMGCustomer>(nullptr);
+        this->shop = shared_ptr<AMGShop>(nullptr);
 		this->state = ORDER_STATE::NEW;
 		
 	}
@@ -55,10 +55,6 @@ namespace amgdispatchcommon {
      * @postcondition (The instance of the object is removed from memory)
      */
     AMGOrder::~AMGOrder() {
-        for(int i = 0; i < items.size(); i++){
-            delete items[i];
-        }
-        //delete customer;
 	}
     
     /**
@@ -67,7 +63,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The shop of the object is set)
      */
-    void AMGOrder::SetShop(AMGShop *a) {
+    void AMGOrder::SetShop(shared_ptr<AMGShop> a) {
         this->shop = a;
     }
     
@@ -77,7 +73,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The shop of the object is returned)
      */
-    AMGShop *AMGOrder::GetShop() {
+    shared_ptr<AMGShop> AMGOrder::GetShop() {
         return this->shop;
     }
     
@@ -87,7 +83,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The customer of the object is set)
      */
-    void AMGOrder::SetCustomer(AMGCustomer *a){
+    void AMGOrder::SetCustomer(shared_ptr<AMGCustomer> a){
         this->customer = a;
     }
     
@@ -97,7 +93,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The customer of the object is returned)
      */
-    AMGCustomer *AMGOrder::GetCustomer() {
+    shared_ptr<AMGCustomer> AMGOrder::GetCustomer() {
         return this->customer;
     }
 
@@ -107,7 +103,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The new item is added if it does not exist)
      */
-    void AMGOrder::AddItem(AMGItem *item) {
+    void AMGOrder::AddItem(shared_ptr<AMGItem> item) {
         if(this->items.size() == 0){
             this->items.push_back(item);
         }
@@ -126,7 +122,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The item is removed if it exists)
      */
-    void AMGOrder::RemoveItem(AMGItem *item) {
+    void AMGOrder::RemoveItem(shared_ptr<AMGItem> item) {
 		for(int i = 0; i < items.size(); i++) {
 			if(items[i]->Equals(item)){
 				items.erase(items.begin() + i);
@@ -164,7 +160,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The items of the object is returned)
      */
-    vector<AMGItem *> AMGOrder::GetItems() {
+    vector<shared_ptr<AMGItem> > AMGOrder::GetItems() {
 		return this->items;
 	}
     

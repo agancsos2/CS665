@@ -29,7 +29,7 @@ namespace amgdispatchcommon{
 	AMGDelivery::AMGDelivery(){
 		this->total_distance = 0;
 		this->delivery_id = rand();
-		this->order = new AMGOrder();
+		this->order = shared_ptr<AMGOrder>(new AMGOrder());
 	}
 	
     /**
@@ -37,7 +37,6 @@ namespace amgdispatchcommon{
      * @postcondition (The instance of the object is removed from memory)
      */
     AMGDelivery::~AMGDelivery() {
-        delete order;
 	}
 
     /**
@@ -45,7 +44,7 @@ namespace amgdispatchcommon{
      * @param order Order item that the delivery instance includes
      * @postcondition (A new instance of the object has been created.)
      */
-    AMGDelivery::AMGDelivery(AMGOrder *order, int distance) {
+    AMGDelivery::AMGDelivery(shared_ptr<AMGOrder> order, int distance) {
 		this->order = order;
 		this->total_distance = distance;
 		this->delivery_id = rand();
@@ -57,7 +56,7 @@ namespace amgdispatchcommon{
      * @precondition  (The instance of the object must exist)
      * @postcondition (The order of the object is set)
      */
-	void AMGDelivery::SetOrder(AMGOrder *order) {
+	void AMGDelivery::SetOrder(shared_ptr<AMGOrder> order) {
 		this->order = order;
 	}
 
@@ -67,7 +66,7 @@ namespace amgdispatchcommon{
      * @precondition  (The instance of the object must exist)
      * @postcondition (The order of the object is returned)
      */
-	AMGOrder *AMGDelivery::GetOrder(){
+	shared_ptr<AMGOrder> AMGDelivery::GetOrder(){
 		return order;
 	}
     

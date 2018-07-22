@@ -5,6 +5,7 @@
 #include "amgsystem.h"
 #include "amgconfiguration.h"
 #include "amgtracer.h"
+#include "amgpointer.h"
 
 
 namespace amgcommon{}

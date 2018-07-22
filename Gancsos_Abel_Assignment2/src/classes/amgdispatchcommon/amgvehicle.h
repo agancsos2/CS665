@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include "amgdelivery.h"
+#include <memory>
 using namespace std;
 
 namespace amgdispatchcommon {

@@ -2,7 +2,7 @@
 
 namespace amgdispatchobserver {
 
-	AMGDelivery *AMGCommonObserver::GetDelivery(){
+	shared_ptr<AMGDelivery> AMGCommonObserver::GetDelivery(){
 		return this->delivery;
 	}
 

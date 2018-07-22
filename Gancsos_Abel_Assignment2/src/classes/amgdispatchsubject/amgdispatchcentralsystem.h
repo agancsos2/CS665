@@ -23,8 +23,8 @@ namespace amgdispatchsubject {
 	 */
 	class AMGDispatchCentralSystem : public AMGDispatchSubject {
 		private:
-        	vector<AMGCommonObserver *> observers;
-        	vector<AMGOrder *> orders;
+        	vector<shared_ptr<AMGCommonObserver> > observers;
+        	vector<shared_ptr<AMGOrder> > orders;
 			int traffic_events;
 			const static int max_retries = 3;
 			int retries;
@@ -33,18 +33,18 @@ namespace amgdispatchsubject {
         	void PollStatuses();
         	void DisplayAll();
         	void Calculate();
-        	void Dispatch(AMGDelivery *a, AMGVehicleObserver *b);
-			vector<AMGVehicleObserver *> GetAvailableVehicles(AMGOrder *a);
-			vector<AMGVehicleObserver *> GetFreezerOnlyVehicles(AMGOrder *a);
-			AMGVehicleObserver *Calculate(AMGOrder *a);
+        	void Dispatch(shared_ptr<AMGDelivery> a, shared_ptr<AMGVehicleObserver> b);
+			vector<shared_ptr<AMGVehicleObserver> > GetAvailableVehicles(shared_ptr<AMGOrder> a);
+			vector<shared_ptr<AMGVehicleObserver> > GetFreezerOnlyVehicles(shared_ptr<AMGOrder> a);
+			shared_ptr<AMGVehicleObserver> Calculate(shared_ptr<AMGOrder> a);
 			bool AllDelivered();
 		public:
 			AMGDispatchCentralSystem();
 			AMGDispatchCentralSystem(int a);
             ~AMGDispatchCentralSystem();
-        	void SetOrders(vector<AMGOrder *> a);
-        	void RegisterObserver(AMGCommonObserver *observer);
-        	void DeregisterObserver(AMGCommonObserver *observer);
+        	void SetOrders(vector<shared_ptr<AMGOrder> > a);
+        	void RegisterObserver(shared_ptr<AMGCommonObserver> observer);
+        	void DeregisterObserver(shared_ptr<AMGCommonObserver> observer);
         	void NotifyObservers();
     };
 }

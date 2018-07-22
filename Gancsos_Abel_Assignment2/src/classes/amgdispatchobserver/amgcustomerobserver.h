@@ -15,13 +15,13 @@ namespace amgdispatchobserver {
 	class AMGCustomerObserver : public AMGCommonObserver {
 
 		private:
-			AMGCustomer *customer;
+			shared_ptr<AMGCustomer> customer;
         	const static int notify_delay_seconds = 2;
 		public:
 			AMGCustomerObserver();
 			~AMGCustomerObserver();
-			AMGCustomerObserver(AMGCustomer *a);
-			void Update(AMGDelivery *delivery, int distance);
+			AMGCustomerObserver(shared_ptr<AMGCustomer> a);
+			void Update(shared_ptr<AMGDelivery> delivery, int distance);
         	void Display();
 	};	
 }

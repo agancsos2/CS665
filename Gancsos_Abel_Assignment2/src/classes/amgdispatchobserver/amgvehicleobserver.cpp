@@ -14,12 +14,12 @@ namespace amgdispatchobserver {
      * @postcondition (The list of sorted vehicles is returned)
      * @todo Change from bubble sort to merge sort
      */
-    vector<AMGVehicleObserver *> AMGVehicleObserver::Sort(vector<AMGVehicleObserver *> a, AMGOrder *b){
+    vector<shared_ptr<AMGVehicleObserver> > AMGVehicleObserver::Sort(vector<shared_ptr<AMGVehicleObserver> > a, shared_ptr<AMGOrder> b){
         for(int i = 0; i < a.size(); i++){
             for(int j = 0; j < a.size(); j++){
                 if(a[i]->GetVehicle()->GetDistance(b->GetShop()->GetIdentity()) + b->GetCustomer()->GetDistance(b->GetShop()->GetIdentity()) > 
 					a[j]->GetVehicle()->GetDistance(b->GetShop()->GetIdentity()) + b->GetCustomer()->GetDistance(b->GetShop()->GetIdentity())){
-                    AMGVehicleObserver *temp = a[i];
+                    shared_ptr<AMGVehicleObserver> temp = a[i];
                     a[i] = a[j];
                     a[j] = temp;
                 }
@@ -34,7 +34,7 @@ namespace amgdispatchobserver {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The delivery is set)
      */
-	void AMGVehicleObserver::SetDelivery(AMGDelivery *a){
+	void AMGVehicleObserver::SetDelivery(shared_ptr<AMGDelivery> a){
 		if(this->delivery == nullptr){
 			cout << "Notifying driver of " << this->vehicle->GetName() << " they have a new delivery..." << endl;
 			AMGSystem::Sleep(notify_delay_seconds);
@@ -45,7 +45,7 @@ namespace amgdispatchobserver {
 		}
 	}
 
-	AMGDelivery *AMGVehicleObserver::GetDelivery(){
+	shared_ptr<AMGDelivery> AMGVehicleObserver::GetDelivery(){
 		return this->delivery;
 	}
 
@@ -55,7 +55,7 @@ namespace amgdispatchobserver {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The vehicle is returned)
      */
-	AMGVehicle *AMGVehicleObserver::GetVehicle(){
+	shared_ptr<AMGVehicle> AMGVehicleObserver::GetVehicle(){
 		return this->vehicle;
 	}
 
@@ -64,8 +64,8 @@ namespace amgdispatchobserver {
      * @postcondition (A new instance of the object has been created.)
      */
 	AMGVehicleObserver::AMGVehicleObserver() {
-		this->delivery = nullptr;
-		this->vehicle = new AMGVehicle();
+		this->delivery = shared_ptr<AMGDelivery>(nullptr);
+		this->vehicle = shared_ptr<AMGVehicle>(new AMGVehicle());
 		this->distance = 0;
 	}
 
@@ -74,9 +74,6 @@ namespace amgdispatchobserver {
      * @postcondition (The instance of the object is removed from memory)
      */
 	AMGVehicleObserver::~AMGVehicleObserver() {
-		if(vehicle){
-			delete vehicle;
-		}
 	}
 
     /**
@@ -84,9 +81,9 @@ namespace amgdispatchobserver {
      * @param a Vehicle object for the observer
      * @postcondition (A new instance of the object has been created.)
      */
-    AMGVehicleObserver::AMGVehicleObserver(AMGVehicle *a) {
+    AMGVehicleObserver::AMGVehicleObserver(shared_ptr<AMGVehicle> a) {
 		this->vehicle = a;
-		this->delivery = nullptr;
+        this->delivery = shared_ptr<AMGDelivery>(nullptr);
 		this->distance = 0;
 	}
     
@@ -135,7 +132,7 @@ namespace amgdispatchobserver {
 		if(this->delivery != NULL){
 			cout << "*** Customer: " << this->delivery->GetOrder()->GetCustomer()->ToString() << endl;
 			cout << "*** Items:" << endl;
-			for(AMGItem *cursor : this->delivery->GetOrder()->GetItems()){
+			for(shared_ptr<AMGItem> cursor : this->delivery->GetOrder()->GetItems()){
 				cout << "**** " << cursor->ToString() << endl;
 			}
 			if(this->vehicle->GetState() == VEHICLE_STATE::IN_TRANSIT){

@@ -15,9 +15,6 @@ namespace amgdispatchcommon {
      * @postcondition (The instance of the object is removed from memory)
      */
     AMGShop::~AMGShop() {
-        for(int i = 0; i < products.size(); i++){
-            delete products[i];
-        }
 	}
 
     /**
@@ -27,7 +24,7 @@ namespace amgdispatchcommon {
 	 * @param products Products available at the store
      * @postcondition (A new instance of the object has been created.)
      */
-    AMGShop::AMGShop(string name, int distance, vector<AMGProduct *> products) {
+    AMGShop::AMGShop(string name, int distance, vector<shared_ptr<AMGProduct> > products) {
 		this->name = name;
         this->identity = rand();
 		this->distance = distance;
@@ -91,7 +88,7 @@ namespace amgdispatchcommon {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The products of the object is returned)
      */
-    vector<AMGProduct *> AMGShop::GetProducts() {
+    vector<shared_ptr<AMGProduct> > AMGShop::GetProducts() {
 		return products;
 	}
 

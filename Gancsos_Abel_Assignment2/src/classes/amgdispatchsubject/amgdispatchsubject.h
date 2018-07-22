@@ -12,12 +12,12 @@ namespace amgdispatchsubject {
 
 	class AMGDispatchSubject {
 		protected:
-			vector<AMGCommonObserver *> observers;
+			vector<shared_ptr<AMGCommonObserver> > observers;
 		public:
 			AMGDispatchSubject();
 			virtual ~AMGDispatchSubject();
-			virtual void RegisterObserver(AMGCommonObserver *observer) = 0;
-			virtual void DeregisterObserver(AMGCommonObserver *observer) = 0;
+			virtual void RegisterObserver(shared_ptr<AMGCommonObserver> observer) = 0;
+			virtual void DeregisterObserver(shared_ptr<AMGCommonObserver> observer) = 0;
 			virtual void NotifyObservers() = 0;
 	};
 		

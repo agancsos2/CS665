@@ -22,9 +22,9 @@ namespace amgdispatchsubject {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The list of available freezer only vehicles is returned)
      */
-	vector<AMGVehicleObserver *> AMGDispatchCentralSystem::GetFreezerOnlyVehicles(AMGOrder *a) {
-		vector<AMGVehicleObserver *> freezer_only;
-		vector<AMGVehicleObserver *> available;
+	vector<shared_ptr<AMGVehicleObserver> > AMGDispatchCentralSystem::GetFreezerOnlyVehicles(shared_ptr<AMGOrder> a) {
+		vector<shared_ptr<AMGVehicleObserver> > freezer_only;
+		vector<shared_ptr<AMGVehicleObserver> > available;
 		available = this->GetAvailableVehicles(a);
 		for(int i = 0; i < available.size(); i++){
 			if(available[i]->GetVehicle()->HasFreezer()){
@@ -42,10 +42,10 @@ namespace amgdispatchsubject {
 	 * @precondition  (The instance of the object must exist)
 	 * @postcondition (The list of available vehicles is returned)
 	 */
-	vector<AMGVehicleObserver *> AMGDispatchCentralSystem::GetAvailableVehicles(AMGOrder *a){
-		vector<AMGVehicleObserver *> vehicles;
+	vector<shared_ptr<AMGVehicleObserver> > AMGDispatchCentralSystem::GetAvailableVehicles(shared_ptr<AMGOrder> a){
+		vector<shared_ptr<AMGVehicleObserver> > vehicles;
 		for(int i = 0; i < this->observers.size(); i++){
-			AMGVehicleObserver *temp = static_cast<AMGVehicleObserver *>(this->observers[i]);
+			shared_ptr<AMGVehicleObserver> temp = dynamic_pointer_cast<AMGVehicleObserver>(this->observers[i]);
 			if(temp != nullptr){
 				if(temp->GetVehicle()->GetState() != VEHICLE_STATE::IN_TRANSIT){
 					vehicles.push_back(temp);
@@ -79,9 +79,6 @@ namespace amgdispatchsubject {
      * @postcondition (The instance of the object is removed from memory)
      */
     AMGDispatchCentralSystem::~AMGDispatchCentralSystem() {
-        for(int i = 0; i < observers.size(); i++) {
-            delete observers[i];
-        }
         observers.clear();
 	}
    
@@ -91,7 +88,7 @@ namespace amgdispatchsubject {
      * @precondition  (The instance of the central system must exist)
      * @postcondition (The observer has subscribed to the subject)
      */
-    void AMGDispatchCentralSystem::RegisterObserver(AMGCommonObserver *observer) {
+    void AMGDispatchCentralSystem::RegisterObserver(shared_ptr<AMGCommonObserver> observer) {
         observers.push_back(observer);
     }
     
@@ -101,7 +98,7 @@ namespace amgdispatchsubject {
      * @precondition  (The instance of the central system must exist)
      * @postcondition (The observer has unsubscribed to the subject)
      */
-    void AMGDispatchCentralSystem::DeregisterObserver(AMGCommonObserver *observer) {
+    void AMGDispatchCentralSystem::DeregisterObserver(shared_ptr<AMGCommonObserver> observer) {
         for(int i = 0; i < observers.size(); i++) {
             if(observer == observers[i]) {
                 observers.erase(observers.begin() + i);
@@ -134,9 +131,9 @@ namespace amgdispatchsubject {
      * @precondition  (The instance of the central system must exist)
      * @postcondition (The vehicle is returned if found)
      */
-	AMGVehicleObserver *AMGDispatchCentralSystem::Calculate(AMGOrder *a){
-        vector<AMGVehicleObserver *> available = this->GetAvailableVehicles(a);
-        AMGVehicleObserver *current_vehicle = nullptr;
+	shared_ptr<AMGVehicleObserver> AMGDispatchCentralSystem::Calculate(shared_ptr<AMGOrder> a){
+        vector<shared_ptr<AMGVehicleObserver> > available = this->GetAvailableVehicles(a);
+        shared_ptr<AMGVehicleObserver> current_vehicle = shared_ptr<AMGVehicleObserver>(nullptr);
 
 		if(available.size() == 0){
 			return nullptr;
@@ -187,8 +184,8 @@ namespace amgdispatchsubject {
      * @postcondition (The orders are up to date)
      */
     void AMGDispatchCentralSystem::Calculate() {
-		vector<AMGVehicleObserver *> available = this->GetAvailableVehicles(this->orders[0]);
-        AMGVehicleObserver *current_vehicle = nullptr;
+		vector<shared_ptr<AMGVehicleObserver> > available = this->GetAvailableVehicles(this->orders[0]);
+        shared_ptr<AMGVehicleObserver> current_vehicle = nullptr;
 
 		// If there's any vehicles available
 		if(available.size() > 0){
@@ -206,12 +203,12 @@ namespace amgdispatchsubject {
 						// If customer has a birthday
         				if(this->orders[i]->GetCustomer()->HasBirthday()){
             				// Add free gift to ordera
-            				this->orders[i]->AddItem(new AMGItem(new AMGProductGift("Chocolate"), 1));
-                            this->orders[i]->AddItem(new AMGItem(new AMGProductFlowers("Flowers"), 1));
+            				this->orders[i]->AddItem(shared_ptr<AMGItem>(new AMGItem(shared_ptr<AMGProduct>(new AMGProductGift("Chocolate")), 1)));
+                            this->orders[i]->AddItem(shared_ptr<AMGItem>(new AMGItem(shared_ptr<AMGProduct>(new AMGProductFlowers("Flowers")), 1)));
         				}	
 						// Dispatch delivery
-						this->Dispatch(new AMGDelivery(this->orders[i], current_vehicle->GetVehicle()->GetDistance(this->orders[i]->GetShop()->GetIdentity()) + 
-							this->orders[i]->GetCustomer()->GetDistance(this->orders[i]->GetShop()->GetIdentity())), current_vehicle); 
+						this->Dispatch(shared_ptr<AMGDelivery>(new AMGDelivery(this->orders[i], current_vehicle->GetVehicle()->GetDistance(this->orders[i]->GetShop()->GetIdentity()) +
+							this->orders[i]->GetCustomer()->GetDistance(this->orders[i]->GetShop()->GetIdentity()))), current_vehicle);
 						this->orders.erase(this->orders.begin() + i);
 
 					}
@@ -229,7 +226,7 @@ namespace amgdispatchsubject {
      * @precondition  (The instance of the central system must exist)
      * @postcondition (The orders are up to date and displays which vehicle it is assigned to and then the delivery has to be tracked as above)
      */
-    void AMGDispatchCentralSystem::Dispatch(AMGDelivery *a, AMGVehicleObserver *b) {
+    void AMGDispatchCentralSystem::Dispatch(shared_ptr<AMGDelivery> a, shared_ptr<AMGVehicleObserver> b) {
 		a->GetOrder()->SetState(ORDER_STATE::FILLED);
  		b->SetDelivery(a);
     }
@@ -243,7 +240,6 @@ namespace amgdispatchsubject {
 		while(this->orders.size() > 0 || !AllDelivered()){
 			for(int i = 0; i < this->orders.size(); i++){
 				if(this->orders[i]->GetState() == ORDER_STATE::DELIVERED){
-					delete this->orders[i];
 					this->orders.erase(this->orders.begin() + i);
 				}
 			}
@@ -275,7 +271,7 @@ namespace amgdispatchsubject {
 			}
 
 			cout << "Available Vehicles: " << endl;
-			vector<AMGVehicleObserver *>available = this->GetAvailableVehicles(this->orders[0]);
+			vector<shared_ptr<AMGVehicleObserver> >available = this->GetAvailableVehicles(this->orders[0]);
 			for(int i = 0; i < available.size(); i++){
 				cout << available[i]->GetVehicle()->ToString() << endl;
 			}
@@ -301,7 +297,7 @@ namespace amgdispatchsubject {
      * @precondition  (The instance of the object must exist)
      * @postcondition (The data of the object is set)
      */
-    void AMGDispatchCentralSystem::SetOrders(vector<AMGOrder *> a) {
+    void AMGDispatchCentralSystem::SetOrders(vector<shared_ptr<AMGOrder> > a) {
         this->orders = a;
         PollStatuses();
     }
