@@ -76,6 +76,13 @@ namespace amgbattleship {
 					}
 				}
 
+				if(stoi(pairs[0]) > this->board->GetBoardWidth() - 1 || stoi(pairs[1]) > this->board->GetBoardHeight() - 1 ||
+					stoi(pairs[0]) < 0 || stoi(pairs[1]) < 0){
+					cout << "Coordinates are not within range of the map..." << endl;
+					this->input_buffer = "";
+					continue;
+				}
+
                 // Build request
 				shared_ptr<AMGLocation> new_location(new AMGLocation(stoi(pairs[0]), stoi(pairs[1])));
 				shared_ptr<AMGBattleshipTarget> new_request(new AMGBattleshipTarget(new_location, board));
@@ -169,6 +176,7 @@ namespace amgbattleship {
 			this->board->PrintHeader();
 			this->board->PrintBoard();
             this->PromptUser();
+			AMGSystem::Sleep(sleep_seconds);
 			AMGSystem::Clear();
         }
 

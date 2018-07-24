@@ -28,7 +28,7 @@ namespace amgbattleship {
 			int current_player;
 			void PrintGameOver();
 			void GenerateShips();
-			const static int sleep_seconds = 20;
+			const static int sleep_seconds = 8;
 		public:
 			AMGBattleship();
 			~AMGBattleship();
