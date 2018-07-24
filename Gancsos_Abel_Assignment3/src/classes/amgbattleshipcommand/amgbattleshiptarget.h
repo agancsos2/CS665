@@ -21,10 +21,9 @@ namespace amgbattleshipcommand {
     class AMGBattleshipTarget{
 
 		private:
+            shared_ptr<AMGLocation> location;
+            shared_ptr<AMGBattleshipBoard> board;
         public:
-        shared_ptr<AMGLocation> location;
-        shared_ptr<AMGBattleshipBoard> board;
-
             AMGBattleshipTarget();
 			AMGBattleshipTarget(shared_ptr<AMGLocation> a, shared_ptr<AMGBattleshipBoard> b);
             ~AMGBattleshipTarget();
