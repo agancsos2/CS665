@@ -9,9 +9,9 @@
 This command-line utility serves as a text-based console version of the classic Battleship board game.  Typically there would be two users that would have the same number of ships on the board at different locations and they both take turns trying to sink the other users ships.  In the real game, each ship would have a different length and thus a different number of required shots to sink it; however, in this version of the game, every ship is represented by the same size, but in different locations.  After each shot, the current player will only see there board, locations of their ships, what shots were taken against their ships, and which ships were hit/sunk.  The board is then cleared in preparation for the next player.
 
 ### Markings
-* - : Position is filled with water.  No shot.
-* * : Position is filled with water.  Shot.
-* X : Position is filled with a ship.  Hit.
+* -: Position is filled with water.  No shot.
+* *: Position is filled with water.  Shot.
+* X: Position is filled with a ship.  Hit.
 
 ### Assumptions:
 * Users play the game on the same command line, but their own context during their turn.
