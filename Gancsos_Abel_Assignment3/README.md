@@ -36,7 +36,7 @@ When it comes to how simple the system is to understand, particularly by other d
 In regards to avoiding duplicated code, for the most part, the implementation uses several methods, particularly in the AMGBattleshipBoard class, for code blocks that are used in multiple areas.  However, some code has been duplicated, such as the SetBoardWidth(), SetBoardHeight(), and SetShipCount() methods, for security purposes.  For example, the implementation has one copy of these methods for the AMGBattleship “session” or wrapper class so that the main method can safely set those fields from the command-line arguments.  Then from those copies of the methods, the fields are set on the AMGBattleshipBoard instance to configure the board. 
 
 ## FLAGS                                    
-The folling flags can be used to configure the game board
+The following flags can be used to configure the game board
 * -height : Height of the board (default: 5)
 * -width  : Width of the board (default: 5)
 * -count  : Number of ships on the board (default: 3)
