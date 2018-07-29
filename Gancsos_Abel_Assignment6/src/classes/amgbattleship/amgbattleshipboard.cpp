@@ -230,5 +230,13 @@ namespace amgbattleship {
 		for(int i = 0; i < temp_shots.size(); i++){
 			cout << temp_shots[i]->ToString() << endl;
 	 	}
+        
+        cout << endl << endl;
+        
+        cout << "Player " << this->data->GetPlayerNumber() << " 's shots:" << endl;
+        for(int i = 0; i < this->data->GetPlayerShots().size(); i++){
+            cout << this->data->GetPlayerShots()[i]->ToString() << endl;
+        }
+
 	}
 }
