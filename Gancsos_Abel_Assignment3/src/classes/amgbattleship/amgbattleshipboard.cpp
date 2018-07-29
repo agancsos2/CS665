@@ -386,6 +386,7 @@ namespace amgbattleship {
      */
 	void AMGBattleshipBoard::PrintBoard() {
         vector<shared_ptr<AMGLocation> > temp_shots;
+        vector<shared_ptr<AMGLocation> > temp_shots2;
         vector<shared_ptr<AMGShip> > temp_ships;
         int temp_ships_left = 0;
 		int temp_shots_count = 0;
@@ -394,12 +395,14 @@ namespace amgbattleship {
         switch(this->current_player) {
             case 1:
                 temp_shots = this->player2_shots;
+                temp_shots2 = this->player1_shots;
                 temp_ships = this->player1_ships;
                 temp_ships_left = this->player1_ships_left;
 				temp_shots_count = this->player1_shots.size();
                 break;
             case 2:
                 temp_shots = this->player1_shots;
+                temp_shots2 = this->player1_shots;
                 temp_ships = this->player2_ships;
                 temp_ships_left = this->player2_ships_left;
 				temp_shots_count = this->player2_shots.size();
@@ -449,5 +452,12 @@ namespace amgbattleship {
 		for(int i = 0; i < temp_shots.size(); i++){
 			cout << temp_shots[i]->ToString() << endl;
 	 	}
+        
+        cout << endl << endl;
+        
+        cout << "Player " << (current_player == 1 ? "1" : "2") << " 's shots:" << endl;
+        for(int i = 0; i < temp_shots2.size(); i++){
+            cout << temp_shots2[i]->ToString() << endl;
+        }
 	}
 }
