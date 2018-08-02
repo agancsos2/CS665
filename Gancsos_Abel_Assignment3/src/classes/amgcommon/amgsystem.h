@@ -2,7 +2,11 @@
 #define __AMGSYSTEM_H_INCLUDED__ 
 
 #include <iostream>
-#include <unistd.h>
+#if !defined(WIN32) && !defined(_WIN32) && !defined(__WIN32) && !defined(__CYGWIN__)
+    #include <unistd.h>
+#else
+    #include <windows.h>
+#endif
 #include <string>
 #include <vector>
 #include <stdexcept>
@@ -43,7 +47,6 @@ namespace amgcommon{
             static void ExitProgram();
             static bool IsDigit(string a);
             static bool ValidateInput(string a, INPUT_TYPES b);
-			static void Clear();
 	};
 }
 
