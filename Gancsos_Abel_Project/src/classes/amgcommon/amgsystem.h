@@ -43,7 +43,7 @@ namespace amgcommon{
 			string GetSource();
 			string GetTarget();
 			bool FileExists(string path);
-			static void Sleep(int seconds);
+			static void Sleeper(int seconds);
             static void ExitProgram();
             static bool IsDigit(string a);
             static bool ValidateInput(string a, INPUT_TYPES b);

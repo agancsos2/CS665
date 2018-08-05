@@ -61,7 +61,7 @@ namespace amgcommon{
 	 * @param seconds Amount of seconds to sleep
 	 * @postcondition (The process waits for a period of tine)
 	 */
-	void AMGSystem::Sleep(int seconds){
+	void AMGSystem::Sleeper(int seconds){
     	#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
         	Sleep(seconds * 100);
         #else

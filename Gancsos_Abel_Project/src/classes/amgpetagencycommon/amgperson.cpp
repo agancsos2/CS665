@@ -3,25 +3,6 @@
 namespace amgpetagencycommon {
     
     /**
-     * This is the default constructor
-     * @precondition  (There is a need for a new instance of the class)
-     * @postcondition (A new instance of the object is created)
-     */
-	AMGPerson::AMGPerson(){
-    	first_name = "";
-        last_name = "";
-        gender = GENDER::NONE;
-        race = RACE::NONE;
-        age = 0;
-        hair_color = HAIR_COLOR::NONE;
-        eye_color = EYE_COLOR::NONE;
-        nationality = NATIONALITY::NONE;
-        weight = 0.0;
-        height = 0.0;
-        waist_size = 0; 
-	}
-    
-    /**
      * This method is used to return the first name
      * @return First name
      * @precondotion  (The instance of the object must exist)
@@ -41,12 +22,19 @@ namespace amgpetagencycommon {
         return this->last_name;
     }
 
-    /**
-     * This is the deconstructor
-     * @postcondition (The instance of the object is removed from memory)
-     */
-	AMGPerson::~AMGPerson() {
-	}
+    AMGPerson::AMGPerson() {
+        this->first_name = "";
+        this->last_name = "";
+        this->age = 0;
+        this->waist_size = 0.0;
+        this->height = 0.0;
+        this->weight = 0.0;
+        this->gender = GENDER::NONE;
+        this->race = RACE::NONE;
+        this->nationality = NATIONALITY::NONE;
+        this->eye_color = EYE_COLOR::NONE;
+        this->hair_color = HAIR_COLOR::NONE;
+    }
 
     /**
      * This method returns the object as a string representation
@@ -56,38 +44,206 @@ namespace amgpetagencycommon {
      */
 	string AMGPerson::ToString() {
 		string person_string = "(";
-		person_string += ("First: " + first_name); 
-		person_string += (";Last: " + last_name);
-		person_string += (";" + AMGCommonEnums::GetGenderName(this->gender));
-		person_string += (";RACE: " + AMGCommonEnums::GetRaceName(this->race));
-        person_string += (";Age: " + to_string(age));
-		person_string += (";Hair: " + AMGCommonEnums::GetHairColorName(this->hair_color));
-		person_string += (";Eyes: " + AMGCommonEnums::GetEyeColorName(this->eye_color));
-		person_string += (";Nationality: " + AMGCommonEnums::GetNationalityName(this->nationality));
-		person_string += (";Weight: " + to_string(weight) + " lb");
-        person_string += (";Height: " + to_string(height) + " in");
-        person_string += (";Waist Size: " + to_string(waist_size));
+		person_string += ("First: " + this->GetFirstName()); 
+		person_string += (";Last: " + this->GetLastName());
+		person_string += (";" + AMGCommonEnums::GetGenderName(this->GetGender()));
+		person_string += (";RACE: " + AMGCommonEnums::GetRaceName(this->GetRace()));
+        person_string += (";Age: " + to_string(this->GetAge()));
+		person_string += (";Hair: " + AMGCommonEnums::GetHairColorName(this->GetHairColor()));
+		person_string += (";Eyes: " + AMGCommonEnums::GetEyeColorName(this->GetEyeColor()));
+		person_string += (";Nationality: " + AMGCommonEnums::GetNationalityName(this->GetNationality()));
+		person_string += (";Weight: " + to_string(this->GetWeight()) + " lb");
+        person_string += (";Height: " + to_string(this->GetHeight()) + " in");
+        person_string += (";Waist Size: " + to_string(this->GetWaistSize()));
 		person_string += ")";
 		return person_string;
 	}
 
     /**
-     * This is the builder constructor
-     * @param builder Builder instance containing the person information
-     * @postcondition (A new person instance is created from the builder)
+     * This method is used to return the gender
+     * @return Gender
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
      */
-	AMGPerson::AMGPerson(AMGPerson::PersonBuilder *builder) {
-		this->first_name = builder->first_name;
-        this->last_name = builder->last_name;
-        this->gender = builder->gender;
-        this->race = builder->race;
-        this->age = builder->age;
-        this->hair_color = builder->hair_color;
-        this->eye_color = builder->eye_color;
-        this->nationality = builder->nationality;
-        this->weight = builder->weight;
-        this->height = builder->height;
-        this->waist_size = builder->waist_size;
-        delete builder;
+    GENDER AMGPerson::GetGender() {
+        return this->gender;
+    }
+
+    /**
+     * This method is used to return the race
+     * @return Race
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    RACE AMGPerson::GetRace() {
+        return this->race;
+    }
+
+    /**
+     * This method is used to return the age
+     * @return Age
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    int AMGPerson::GetAge() {
+        return this->age;
+    }
+
+    /**
+     * This method is used to return the hair color
+     * @return Hair color
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    HAIR_COLOR AMGPerson::GetHairColor() {
+        return this->hair_color;
+    }
+
+    /**
+     * This method is used to return the eye color
+     * @return Eye color
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    EYE_COLOR AMGPerson::GetEyeColor() {
+        return this->eye_color;
+    }
+
+    /**
+     * This method is used to return the nationality
+     * @return Nationality
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    NATIONALITY AMGPerson::GetNationality() {
+        return this->nationality;
+    }
+
+    /**
+     * This method is used to return the weight
+     * @return Weight
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    float AMGPerson::GetWeight() {
+        return this->weight;
+    }
+
+    /**
+     * This method is used to return the height
+     * @return Height
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    float AMGPerson::GetHeight() {
+        return this->height;
+    }
+
+    /**
+     * This method is used to return the wasit size
+     * @return Waist size
+     * @precondotion  (The instance of the object must exist)
+     * @postcondition (The last name is returned)
+     */
+    int AMGPerson::GetWaistSize() {
+        return this->waist_size;
+    }
+
+    /**
+	 * This method adds the gender for the person in the builder
+	 * @param a Value for the gender
+	 * @precondition  (The instance of the builder class must exist)
+	 * @postcondition (The gender field is set)
+	 */
+	void AMGPerson::SetGender(GENDER a){
+		this->gender = a;
 	}
+
+    /**
+     * This method adds the race for the person in the builder
+     * @param a Value for the race
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The race field is set)
+     */
+	void AMGPerson::SetRace(RACE a){
+		this->race = a;
+	}
+
+    /**
+     * This method adds the age for the person in the builder
+     * @param a Value for the age
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The age field is set)
+     */
+	void AMGPerson::SetAge(int a){
+		this->age = a;
+	}
+
+    /**
+     * This method adds the hair color for the person in the builder
+     * @param a Value for the hair color
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The hair color field is set)
+     */
+	void AMGPerson::SetHairColor(HAIR_COLOR a){
+		this->hair_color = a;
+	}
+
+    /**
+     * This method adds the eye color for the person in the builder
+     * @param a Value for the eye color
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The hair color field is set)
+     */
+	void AMGPerson::SetEyeColor(EYE_COLOR a){
+		this->eye_color = a;
+	}
+
+    /**
+     * This method adds the nationality for the person in the builder
+     * @param a Value for the nationality
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The nationality field is set)
+     */
+	void AMGPerson::SetNationality(NATIONALITY a){
+		this->nationality = a;
+	}
+
+    /**
+     * This method adds the weight for the person in the builder
+     * @param a Value for the weight
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The weight field is set)
+     */
+	void AMGPerson::SetWeight(float a){
+		this->weight = a;
+	}
+
+    /**
+     * This method adds the height for the person in the builder
+     * @param a Value for the height
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The height field is set)
+     */
+	void AMGPerson::SetHeight(float a){
+		this->height = a;
+	}
+
+    /**
+     * This method adds the waist size for the person in the builder
+     * @param a Value for the waist size
+     * @precondition  (The instance of the builder class must exist)
+     * @postcondition (The waist size field is set)
+     */
+	void AMGPerson::SetWaistSize(int a){
+		this->waist_size = a;
+	}
+
+    void AMGPerson::SetFirstName(string a) {
+        this->first_name = a;
+    }
+
+    void AMGPerson::SetLastName(string a) {
+        this->last_name = a;
+    }
 }

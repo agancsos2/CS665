@@ -16,18 +16,30 @@ namespace amgpetagencycommon {
 	 */
 	class AMGAnimal {
 		protected:
+			const static int adoption_time_seconds = 0;
 			GENDER gender;
 			string name;
 			float height;
 			float weight;
-			const static int adoption_time_seconds = 0;;
 			shared_ptr<AMGPerson> owner;
+			shared_ptr<AMGBreed> breed;
 		public:
 			AMGAnimal();
 			virtual ~AMGAnimal() = 0;
 			virtual string ToString() = 0;
 			virtual string GetType() = 0;
 			virtual void Adopt(shared_ptr<AMGPerson> a, bool delay) = 0;
+			virtual GENDER GetGender() = 0;
+            virtual string GetName() = 0;
+            virtual float GetHeight() = 0;
+            virtual float GetWeight() = 0;
+            virtual shared_ptr<AMGPerson> GetOwner() = 0;
+            virtual void SetGender(GENDER a) = 0;
+            virtual void SetOwner(shared_ptr<AMGPerson> a) = 0;
+            virtual void SetHeight(float a) = 0;
+            virtual void SetWeight(float a) = 0;
+            virtual void SetBreed(shared_ptr<AMGBreed> a) = 0;
+			virtual void SetName(string a) = 0;
 	};
 }
 

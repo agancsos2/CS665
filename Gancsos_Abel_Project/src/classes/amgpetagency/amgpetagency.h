@@ -6,14 +6,18 @@
 #include <memory>
 #include "../amgcommon/amgcommon_all.h"
 #include "../amgpetagencycommon/amgpetagencycommon_all.h"
+#include "../amgpetagencybuilder/amgpersonbuilder/amgpersonbuilder_all.h"
+#include "../amgpetagencybuilder/amganimalbuilder/amganimalbuilder_all.h"
 #include "amgpetagency_all.h"
 using namespace std;
 using namespace amgcommon;
 using namespace amgpetagencycommon;
+using namespace amgpersonbuilder;
+using namespace amganimalbuilder;
 
 namespace amgpetagency {
     /**
-     * This class acts as a "session" or wrapping class for a vending transaction.
+     * This class acts as a "session" or wrapping class.
      * @author  (Abel Gancsos)
      * @version (v. 1.0.0)
      */

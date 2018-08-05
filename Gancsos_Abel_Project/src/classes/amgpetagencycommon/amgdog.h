@@ -3,57 +3,39 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "amgbreed.h"
 #include "amganimal.h"
-#include <memory>
+#include "amgperson.h"
 using namespace std;
 
 namespace amgpetagencycommon {
 
+    
     /**
      * This class represents a dog in the animal kingdom
      */
     class AMGDog : public AMGAnimal {
         protected:
-            GENDER gender;
-            string name;
-            float height;
-            float weight;
-			const static int adoption_time_seconds = 10;
-			shared_ptr<AMGPerson> owner;
-            shared_ptr<AMGBreed> breed;
+            const static int adoption_time_seconds = 5;
         public:
             AMGDog();
-            ~AMGDog();
             shared_ptr<AMGBreed> GetBreed();
             string ToString();
             string GetType();
-            class DogBuilder;
-            AMGDog(shared_ptr<DogBuilder> a);
 			void Adopt(shared_ptr<AMGPerson> a, bool delay);
-    };
-
-    /**
-     * This class helps build the dog object
-     */
-    class AMGDog::DogBuilder{
-        public:
-            GENDER gender;
-            string name;
-            float height;
-            float weight;
-			shared_ptr<AMGPerson> owner;
-			shared_ptr<AMGBreed> breed;
-            DogBuilder();
-            ~DogBuilder();
-            DogBuilder(string name);
-            DogBuilder *WithGender(GENDER a);
-            DogBuilder *WithHeight(float a);
-            DogBuilder *WithWeight(float a);
-            DogBuilder *WithBreed(shared_ptr<AMGBreed> a);
-        	shared_ptr<AMGDog> Build();
+            GENDER GetGender();
+            string GetName();
+            void SetName(string a);
+            float GetHeight();
+            float GetWeight();
+            shared_ptr<AMGPerson> GetOwner();
+            void SetGender(GENDER a);
+            void SetOwner(shared_ptr<AMGPerson> a);
+            void SetHeight(float a);
+            void SetWeight(float a);
+            void SetBreed(shared_ptr<AMGBreed> a);
     };
 }
 
 #endif
-

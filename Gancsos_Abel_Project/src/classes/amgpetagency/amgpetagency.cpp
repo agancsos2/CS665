@@ -84,7 +84,7 @@ namespace amgpetagency {
 			last_name = input_buffer;
 		}
 
-		AMGPerson::PersonBuilder *new_builder = new AMGPerson::PersonBuilder(first_name, last_name);
+		shared_ptr<AMGPersonBuilder> new_builder (new AMGCustomerBuilder(first_name, last_name));
         cout << "Gender? (1-NA, 2-MALE, 3-FEMALE): ";
         cin >> input_buffer;
         if(input_buffer == ""){
@@ -93,13 +93,13 @@ namespace amgpetagency {
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
             switch(stoi(input_buffer)){
                 case 1:
-                    new_builder = new_builder->WithGender(GENDER::NONE);
+                    new_builder->SetGender(GENDER::NONE);
                     break;
                 case 2:
-                    new_builder = new_builder->WithGender(GENDER::MALE);
+                    new_builder->SetGender(GENDER::MALE);
                     break;
                 case 3:
-                    new_builder = new_builder->WithGender(GENDER::FEMALE);
+                    new_builder->SetGender(GENDER::FEMALE);
                     break;
                 default:
                     cout << "Option was not valid..." << endl;
@@ -116,7 +116,7 @@ namespace amgpetagency {
             input_buffer = "0";
         }
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
-            new_builder = new_builder->WithHeight(stoi(input_buffer));
+            new_builder->SetHeight(stoi(input_buffer));
         }
         cout << "Weight(lb): ";
         cin >> input_buffer;
@@ -124,7 +124,7 @@ namespace amgpetagency {
             input_buffer = "0";
         }
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
-            new_builder = new_builder->WithWeight(stoi(input_buffer));
+            new_builder->SetWeight(stoi(input_buffer));
         }
 
 		cout << "Waist Size: ";
@@ -133,7 +133,7 @@ namespace amgpetagency {
             input_buffer = "0";
         }
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
-            new_builder = new_builder->WithWaistSize(stoi(input_buffer));
+            new_builder->SetWaistSize(stoi(input_buffer));
         }
 
 		cout << "Age: ";
@@ -142,7 +142,7 @@ namespace amgpetagency {
             input_buffer = "0";
         }
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
-            new_builder = new_builder->WithAge(stoi(input_buffer));
+            new_builder->SetAge(stoi(input_buffer));
         }
 
         cout << "Nationality: " << endl;
@@ -153,7 +153,7 @@ namespace amgpetagency {
         cin >> input_buffer;
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
             if(stoi(input_buffer) > -1 && stoi(input_buffer) < (sizeof(AMGCommonEnums::ALL_NATIONALITIES) / sizeof(NATIONALITY))){
-                new_builder = new_builder->WithNationality(AMGCommonEnums::ALL_NATIONALITIES[stoi(input_buffer)]);
+                new_builder->SetNationality(AMGCommonEnums::ALL_NATIONALITIES[stoi(input_buffer)]);
             }
         }
 
@@ -165,7 +165,7 @@ namespace amgpetagency {
 		cin >> input_buffer;
 		if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
 			if(stoi(input_buffer) > -1 && stoi(input_buffer) < (sizeof(AMGCommonEnums::ALL_RACES) / sizeof(RACE))){
-				new_builder = new_builder->WithRace(AMGCommonEnums::ALL_RACES[stoi(input_buffer)]);
+				new_builder->SetRace(AMGCommonEnums::ALL_RACES[stoi(input_buffer)]);
 			}	
         }
 
@@ -177,7 +177,7 @@ namespace amgpetagency {
         cin >> input_buffer;
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
             if(stoi(input_buffer) > -1 && stoi(input_buffer) < (sizeof(AMGCommonEnums::ALL_HAIR_COLORS) / sizeof(HAIR_COLOR))){
-                new_builder = new_builder->WithHairColor(AMGCommonEnums::ALL_HAIR_COLORS[stoi(input_buffer)]);
+                new_builder->SetHairColor(AMGCommonEnums::ALL_HAIR_COLORS[stoi(input_buffer)]);
             }
         }
 
@@ -189,11 +189,11 @@ namespace amgpetagency {
         cin >> input_buffer;
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
             if(stoi(input_buffer) > -1 && stoi(input_buffer) < (sizeof(AMGCommonEnums::ALL_EYE_COLORS) / sizeof(EYE_COLOR))){
-                new_builder = new_builder->WithEyeColor(AMGCommonEnums::ALL_EYE_COLORS[stoi(input_buffer)]);
+                new_builder->SetEyeColor(AMGCommonEnums::ALL_EYE_COLORS[stoi(input_buffer)]);
             }
         }
-
-        this->people.push_back(new_builder->Build());
+		shared_ptr<AMGPersonDirector> director(new AMGPersonDirector(new_builder));
+		this->people.push_back(director->Build());
         cout << "New future adopter added!" << endl;
 	}
 
@@ -206,7 +206,7 @@ namespace amgpetagency {
 		input_buffer = "";
 		cout << "What's there name?: ";
 		cin >> input_buffer;
-		AMGDog::DogBuilder *new_builder = new AMGDog::DogBuilder(input_buffer);
+		shared_ptr<AMGAnimalBuilder> new_builder(new AMGDogBuilder(input_buffer));
 		input_buffer = "";
 		cout << "Gender? (1-NA, 2-MALE, 3-FEMALE): ";
 		cin >> input_buffer;
@@ -216,13 +216,13 @@ namespace amgpetagency {
 		if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
 			switch(stoi(input_buffer)){
 				case 1:
-					new_builder = new_builder->WithGender(GENDER::NONE);
+					new_builder->SetGender(GENDER::NONE);
 					break;
 				case 2:
-                    new_builder = new_builder->WithGender(GENDER::MALE);
+                    new_builder->SetGender(GENDER::MALE);
 					break;
 				case 3:
-                    new_builder = new_builder->WithGender(GENDER::FEMALE);
+                    new_builder->SetGender(GENDER::FEMALE);
 					break;
 				default:
 					cout << "Option was not valid..." << endl;
@@ -239,7 +239,7 @@ namespace amgpetagency {
             input_buffer = "0";
         }
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
-			new_builder = new_builder->WithHeight(stoi(input_buffer));
+			new_builder->SetHeight(stoi(input_buffer));
 		}
 		cout << "Weight(lb): ";
         cin >> input_buffer;
@@ -247,7 +247,7 @@ namespace amgpetagency {
             input_buffer = "0";
         }
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
-            new_builder = new_builder->WithWeight(stoi(input_buffer));
+            new_builder->SetWeight(stoi(input_buffer));
         }
 		cout << "Breed?:" << endl;
 		for(int i = 0; i < this->available_breeds.size(); i++){
@@ -260,11 +260,11 @@ namespace amgpetagency {
         }
         if(AMGSystem::ValidateInput(input_buffer, INPUT_TYPES::NUMBER)){
 			if(stoi(input_buffer) > -1 && stoi(input_buffer) < this->available_breeds.size()){
-				new_builder = new_builder->WithBreed(this->available_breeds[stoi(input_buffer)]);
+				new_builder->SetBreed(this->available_breeds[stoi(input_buffer)]);
 			}
 		}
-
-		this->available_pets.push_back(new_builder->Build());
+		shared_ptr<AMGAnimalDirector> director(new AMGAnimalDirector(new_builder));
+        this->available_pets.push_back(director->Build());
 		cout << "New animal was added and needs a home!" << endl;
 	}
 
@@ -388,17 +388,27 @@ namespace amgpetagency {
 	 * @postcondition (The data has been added into memory)
 	 */
 	void AMGPetAgency::InitializeData(){
-
+		
 		// Add breeds
 		available_breeds.push_back(shared_ptr<AMGBreed>(new AMGBreed("Labrador")));
 		available_breeds.push_back(shared_ptr<AMGBreed>(new AMGBreed("Beagle")));
 
 		// Add people
-		people.push_back((new AMGPerson::PersonBuilder("Robert", "Robinson"))->Build());
+		shared_ptr<AMGPersonBuilder> temp_builder(new AMGCustomerBuilder("Robert", "Robinson"));
+		shared_ptr<AMGPersonDirector> temp_director(new AMGPersonDirector(temp_builder));
+		people.push_back(temp_director->Build());
 
 		// Add animals
-		available_pets.push_back((new AMGDog::DogBuilder("Rosco"))->WithGender(GENDER::MALE)->Build());
-		adopted_pets.push_back((new AMGDog::DogBuilder("Spot"))->Build());
+		shared_ptr<AMGAnimalBuilder> temp_builder2(new AMGDogBuilder("Rosco"));
+		temp_builder2->SetGender(GENDER::MALE);
+		shared_ptr<AMGAnimalDirector> temp_director2(new AMGAnimalDirector(temp_builder2));
+		available_pets.push_back(temp_director2->Build());
+
+		temp_builder2 = shared_ptr<AMGAnimalBuilder>(new AMGDogBuilder("Spot"));
+		temp_builder2->SetGender(GENDER::FEMALE);
+		temp_director2 = shared_ptr<AMGAnimalDirector>(new AMGAnimalDirector(temp_builder2));
+		adopted_pets.push_back(temp_director2->Build());
+
 
 		// Adopt an animal
 		adopted_pets.at(0)->Adopt(people.at(0), false); 
@@ -433,7 +443,7 @@ namespace amgpetagency {
      */
     void AMGPetAgency::ListAdoptedPets() {
         for(int i = 0; i < adopted_pets.size(); i++) {
-            cout << i << ". " << adopted_pets.at(i)->ToString() << endl;
+            cout << i << ". " << adopted_pets.at(i)->ToString()  << endl;
         }
     }
     
