@@ -83,7 +83,7 @@ Can be installed from https://cmake.org/download/
 This can be built either using one of the run scripts or manually using the following instructions
 ### Windows
 * Import into a new C++ project
-* Build using Visual Stuido 2017
+* Build using Visual Studio 2017
 
 ### Mac
 Either import it into a new XCode project or compile on the command-line using g++ -std=c++11
