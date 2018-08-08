@@ -19,7 +19,7 @@ In the event that the prototype does become a CLI (command-line interface) for t
 
 ## Assumptions:
 *	The animal breeds have already been breaded and are available for appropriate animals.
-*	Animal types are predefined and no new animal can bee created via combinations.
+*	Animal types are predefined and no new animal can be created via combinations.
 *	A person can only be either a male, female, or not specified.
 *	The measurement used for height is in inches.
 *	The measurement used for weight is pounds.
